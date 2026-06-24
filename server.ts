@@ -1,29 +1,34 @@
 import express from "express";
 import path from "path";
-import { createServer as createViteServer } from "vite";
 import { chatHandler } from "./server/chatbot.ts";
 import dotenv from "dotenv";
 
-// Load environment variables
 dotenv.config();
+
+process.on("uncaughtException", (err) => {
+  console.error("UNCAUGHT EXCEPTION:", err);
+});
+process.on("unhandledRejection", (reason) => {
+  console.error("UNHANDLED REJECTION:", reason);
+});
 
 async function startServer() {
   const app = express();
   const PORT = parseInt(process.env.PORT || "3000", 10);
 
-  // Middleware
+  console.log(`Starting server, NODE_ENV=${process.env.NODE_ENV}, PORT=${PORT}`);
+
   app.use(express.json());
 
-  // API Endpoints
   app.post("/api/chat", chatHandler);
 
   app.get("/api/health", (req, res) => {
     res.json({ status: "healthy" });
   });
 
-  // Vite integration
   if (process.env.NODE_ENV !== "production") {
     console.log("Starting server in DEVELOPMENT mode with Vite dev middleware...");
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -45,4 +50,5 @@ async function startServer() {
 
 startServer().catch((error) => {
   console.error("Critical error starting Express + Vite server:", error);
+  process.exit(1);
 });
