@@ -1,6 +1,6 @@
-# Ahmed Umer — Portfolio
+# My Portfolio
 
-A full-stack portfolio website for Ahmed Umer, an AI Developer. Built with React 19, Express, and Vite. Features a Groq-powered AI chatbot that answers questions about Ahmed's skills, projects, certifications, and background.
+I'm an AI Developer focused on building practical, production-ready AI systems, automation tools, and web applications. This is my full-stack portfolio — built with React 19, Express, and Vite. It includes a Groq-powered AI chatbot that can answer questions about my skills, projects, certifications, and background.
 
 **Live:** [ahmed-umer-portfolio.vercel.app](https://ahmed-umer-portfolio.vercel.app)  
 **Contact:** [ahmedumeranwer@gmail.com](mailto:ahmedumeranwer@gmail.com)  
@@ -70,7 +70,7 @@ Each cert card opens the PDF in a new tab.
 
 ### AI Chatbot ("Get to Know Me")
 - Groq-powered conversational agent
-- Pre-configured with Ahmed's CV data — projects, skills, certifications, hackathons, experience
+- Pre-configured with my CV data — projects, skills, certifications, hackathons, experience
 - Starter prompts for quick questions
 - Data safety notice with contact email fallback
 
@@ -187,7 +187,7 @@ Serves the built app on port 3000.
 **Request:**
 ```json
 {
-  "message": "What projects has Ahmed worked on?",
+  "message": "What projects have you worked on?",
   "history": [
     { "role": "user", "text": "..." },
     { "role": "model", "text": "..." }
@@ -198,7 +198,7 @@ Serves the built app on port 3000.
 **Response:**
 ```json
 {
-  "text": "Ahmed has worked on...",
+  "text": "I have worked on...",
   "engine": "groq"
 }
 ```
