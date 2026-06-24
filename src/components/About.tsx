@@ -79,7 +79,7 @@ export function About({ onContactClick }: AboutProps) {
         {/* Character-by-character reveals */}
         <div className="mb-16 sm:mb-20 md:mb-24 px-4 sm:px-8 flex justify-center">
           <AnimatedText 
-            text="I’m Ahmed Umer, a recent graduate in Artificial Intelligence focused on building practical, production-ready skills in AI systems, automation, and Web development. My work revolves around turning modern AI capabilities into usable applications rather than just theoretical models."
+            text="I’m Ahmed Umer, an AI Developer focused on building practical, production-ready skills in AI systems, automation, and Web development. My work revolves around turning modern AI capabilities into usable applications rather than just theoretical models."
           />
         </div>
 

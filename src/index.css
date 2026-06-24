@@ -47,6 +47,20 @@ html, body, #root {
   -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
+.animate-text-glow {
+  background: linear-gradient(90deg, #D7E2EA 0%, #B600A8 50%, #D7E2EA 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGlow 3s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+  0% { background-position: 100% 0; }
+  50% { background-position: 0% 0; }
+  100% { background-position: 100% 0; }
+}
+
 /* Custom fade scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

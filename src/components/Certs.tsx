@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Award, Calendar, ExternalLink, ShieldCheck, HeartPulse, Cpu, Network, Laptop, Sparkles, PlusCircle } from "lucide-react";
+import React from "react";
+import { Award, Calendar, ShieldCheck, Cpu, Network, Laptop, Sparkles, BrainCircuit, Code } from "lucide-react";
 import { FadeIn } from "./UI";
 
 interface CertificationDetails {
@@ -9,7 +9,7 @@ interface CertificationDetails {
   year: string;
   icon: React.ReactNode;
   tags: string[];
-  pdfPlaceholderName: string;
+  pdfUrl: string;
 }
 
 const RESUME_CERTS: CertificationDetails[] = [
@@ -19,8 +19,8 @@ const RESUME_CERTS: CertificationDetails[] = [
     issuer: "Anthropic",
     year: "2026",
     icon: <Cpu className="w-6 h-6 text-orange-400" />,
-    tags: ["LLM Protocol", "Server Integration", "Context Engineering", "MCP Servers"],
-    pdfPlaceholderName: "anthropic_mcp_certificate.pdf"
+    tags: ["MCP", "Anthropic", "LLM Protocol", "AI Agents"],
+    pdfUrl: "/certs/mcp_anthropic.pdf"
   },
   {
     id: "langchain",
@@ -28,8 +28,8 @@ const RESUME_CERTS: CertificationDetails[] = [
     issuer: "LangChain Academy",
     year: "2026",
     icon: <Network className="w-6 h-6 text-green-400" />,
-    tags: ["LangChain Agents", "LLM Orchestration", "Chains", "RAG Pipeline"],
-    pdfPlaceholderName: "langchain_academy_certificate.pdf"
+    tags: ["LangChain", "LLM", "Python", "RAG"],
+    pdfUrl: "/certs/langchain.pdf"
   },
   {
     id: "n8n",
@@ -37,8 +37,8 @@ const RESUME_CERTS: CertificationDetails[] = [
     issuer: "n8n",
     year: "2025",
     icon: <Laptop className="w-6 h-6 text-pink-400" />,
-    tags: ["Workflow Automation", "API Integration", "n8n Nodes", "Low-Code DevOps"],
-    pdfPlaceholderName: "n8n_level1_certificate.pdf"
+    tags: ["n8n", "Workflow Automation", "API", "Low-Code"],
+    pdfUrl: "/certs/n8n_level_1.pdf"
   },
   {
     id: "cybersecurity",
@@ -46,8 +46,8 @@ const RESUME_CERTS: CertificationDetails[] = [
     issuer: "Cisco Networking Academy",
     year: "2024",
     icon: <ShieldCheck className="w-6 h-6 text-blue-400" />,
-    tags: ["Network Security", "Threat Intel", "Encryption Protocols", "Incident Response"],
-    pdfPlaceholderName: "cisco_cyber_essentials.pdf"
+    tags: ["Cisco", "Cybersecurity", "Network Security", "Threat Detection"],
+    pdfUrl: "/certs/cybersecurity.pdf"
   },
   {
     id: "steameducation",
@@ -55,8 +55,8 @@ const RESUME_CERTS: CertificationDetails[] = [
     issuer: "The University of Faisalabad",
     year: "2025",
     icon: <Award className="w-6 h-6 text-amber-500" />,
-    tags: ["Research", "STEAM", "AI in Pedagogy", "Academic Participant"],
-    pdfPlaceholderName: "icase_2025_participation.pdf"
+    tags: ["STEAM", "Research", "AI in Education", "Conference"],
+    pdfUrl: "/certs/steam_conference.pdf"
   },
   {
     id: "innovative_pakistan",
@@ -64,8 +64,35 @@ const RESUME_CERTS: CertificationDetails[] = [
     issuer: "The University of Faisalabad",
     year: "2026",
     icon: <Sparkles className="w-6 h-6 text-teal-400" />,
-    tags: ["Hackathon", "Ideation", "Entrepreneurship", "Participant"],
-    pdfPlaceholderName: "innovative_pakistan_2026.pdf"
+    tags: ["Innovation", "Entrepreneurship", "Pakistan"],
+    pdfUrl: "/certs/innovative_pakistan.pdf"
+  },
+  {
+    id: "intro_modern_ai",
+    title: "Introduction to Modern AI",
+    issuer: "Cisco Networking Academy",
+    year: "2026",
+    icon: <BrainCircuit className="w-6 h-6 text-indigo-400" />,
+    tags: ["Cisco", "AI", "Machine Learning", "Neural Networks"],
+    pdfUrl: "/certs/intro_modern_ai.pdf"
+  },
+  {
+    id: "python_essentials_1",
+    title: "Python Essentials 1",
+    issuer: "Cisco Networking Academy",
+    year: "2026",
+    icon: <Code className="w-6 h-6 text-yellow-400" />,
+    tags: ["Cisco", "Python", "Basics", "Data Structures"],
+    pdfUrl: "/certs/python_essentials_1.pdf"
+  },
+  {
+    id: "python_essentials_2",
+    title: "Python Essentials 2",
+    issuer: "Cisco Networking Academy",
+    year: "2026",
+    icon: <Code className="w-6 h-6 text-amber-400" />,
+    tags: ["Cisco", "Python", "OOP", "File Handling"],
+    pdfUrl: "/certs/python_essentials_2.pdf"
   },
   {
     id: "digital_marketing",
@@ -73,18 +100,12 @@ const RESUME_CERTS: CertificationDetails[] = [
     issuer: "Google Digital Garage",
     year: "2022",
     icon: <Award className="w-6 h-6 text-red-400" />,
-    tags: ["Google Garage", "SEO/SEM", "Content Strategy", "Analytics Basics"],
-    pdfPlaceholderName: "google_digital_marketing.pdf"
+    tags: ["Google", "Digital Marketing", "SEO", "Analytics"],
+    pdfUrl: "/certs/google_digital_marketing.pdf"
   }
 ];
 
 export function Certs() {
-  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
-
-  const handleOpenPdfNotice = (pdfName: string) => {
-    setSelectedPdf(pdfName);
-  };
-
   return (
     <section className="min-h-screen bg-[#0C0C0C] text-[#D7E2EA] px-6 md:px-12 py-24 select-none relative z-30">
       <div className="max-w-6xl mx-auto w-full">
@@ -108,8 +129,8 @@ export function Certs() {
           {RESUME_CERTS.map((cert, index) => (
             <FadeIn key={cert.id} delay={index * 0.08} y={30} tagName="div">
               <div 
-                className="group relative rounded-2xl border border-white/10 hover:border-[#B600A8]/40 bg-[#121212]/80 hover:bg-[#121212] p-5 flex flex-col justify-between h-[280px] transition-all duration-300 shadow-lg hover:-translate-y-1"
-                onClick={() => handleOpenPdfNotice(cert.pdfPlaceholderName)}
+                className="group relative rounded-2xl border border-white/10 hover:border-[#B600A8]/40 bg-[#121212]/80 hover:bg-[#121212] p-5 flex flex-col justify-between h-[280px] transition-all duration-300 shadow-lg hover:-translate-y-1 cursor-pointer"
+                onClick={() => window.open(cert.pdfUrl, "_blank")}
               >
                 
                 {/* Upper row: icon and year badge */}
@@ -143,101 +164,17 @@ export function Certs() {
                   ))}
                 </div>
 
-                {/* Bottom Trigger: interactive document clicker */}
-                <div className="flex items-center justify-between border-t border-white/5 pt-3 mt-1">
-                  <span className="text-[11px] uppercase tracking-wider font-semibold text-[#D7E2EA]/30 group-hover:text-[#B600A8] transition-colors flex items-center gap-1 cursor-pointer">
-                    View Certificate PDF
-                    <ExternalLink className="w-3 h-3" />
-                  </span>
-                  
-                  <span className="text-[9px] font-mono text-[#D7E2EA]/20">
-                    PDF Placeholder
-                  </span>
-                </div>
+
 
               </div>
             </FadeIn>
           ))}
 
-          {/* DYNAMIC PLACEHOLDER 1: Blank customizable slots left intentional space! */}
-          <FadeIn delay={0.4} y={30} tagName="div">
-            <div className="rounded-2xl border-2 border-dashed border-[#D7E2EA]/10 hover:border-[#B600A8]/40 bg-[#121212]/20 hover:bg-[#121212]/40 h-[280px] p-6 flex flex-col justify-center items-center text-center cursor-pointer group transition-all duration-300">
-              <PlusCircle className="w-10 h-10 text-[#D7E2EA]/20 group-hover:text-[#B600A8] group-hover:scale-110 transition-all duration-300 mb-2" />
-              <h3 className="text-sm font-bold uppercase tracking-wider text-[#D7E2EA]/60 group-hover:text-[#D7E2EA]">
-                Add Certificate
-              </h3>
-              <p className="text-[11px] font-mono text-[#D7E2EA]/30 max-w-xs mt-1.5 leading-normal">
-                Slot prepared for new certificates of cloud certifications, DevOps tools, or hackathon participation awards. Space left deliberately.
-              </p>
-            </div>
-          </FadeIn>
 
-          {/* DYNAMIC PLACEHOLDER 2 */}
-          <FadeIn delay={0.45} y={30} tagName="div">
-            <div className="rounded-2xl border-2 border-dashed border-[#D7E2EA]/10 hover:border-[#7621B0]/40 bg-[#121212]/20 hover:bg-[#121212]/40 h-[280px] p-6 flex flex-col justify-center items-center text-center cursor-pointer group transition-all duration-300">
-              <PlusCircle className="w-10 h-10 text-[#D7E2EA]/20 group-hover:text-[#7621B0] group-hover:scale-110 transition-all duration-300 mb-2" />
-              <h3 className="text-sm font-bold uppercase tracking-wider text-[#D7E2EA]/60 group-hover:text-[#D7E2EA]">
-                Add Research Paper / Thesis
-              </h3>
-              <p className="text-[11px] font-mono text-[#D7E2EA]/30 max-w-xs mt-1.5 leading-normal">
-                Easily mount and preview your final year academic thesis or STEAM publications here during subsequent configurations.
-              </p>
-            </div>
-          </FadeIn>
 
         </div>
 
-        {/* PDF NOTIFICATION POPUP */}
-        {selectedPdf && (
-          <div 
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4"
-            onClick={() => setSelectedPdf(null)}
-          >
-            <div 
-              className="bg-[#121212] border-2 border-[#D7E2EA]/10 rounded-3xl max-w-lg w-full p-6 text-center shadow-2xl relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="w-16 h-16 rounded-full bg-[#B600A8]/10 flex items-center justify-center mx-auto mb-4 animate-bounce-slow">
-                <Laptop className="w-8 h-8 text-[#B600A8]" />
-              </div>
-              <h2 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-white mb-2">
-                Document Placeholder Hook
-              </h2>
-              <p className="text-sm text-[#D7E2EA]/75 mb-4 leading-relaxed font-light">
-                This triggers a view request for <span className="font-mono text-xs text-stone-200 bg-white/10 px-2 py-0.5 rounded">{selectedPdf}</span>.
-              </p>
-              
-              <div className="bg-[#0C0C0C] border border-white/5 rounded-2xl p-4 text-left font-mono text-xs text-[#D7E2EA]/60 leading-relaxed mb-6">
-                <p className="text-white font-bold mb-1 select-none flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-                  Step for Ahmed:
-                </p>
-                <p className="select-text">
-                  To bind your authentic Cisco or Google PDF files:
-                  <br />
-                  1. Put your PDF file inside the `/public/` directory with filename exact to the slot title listed above.
-                  <br />
-                  2. Update PDF link handler in `/src/components/Certs.tsx` to directly anchor window.open(`/${selectedPdf}`)!
-                </p>
-              </div>
 
-              <div className="flex gap-2 justify-center">
-                <button
-                  onClick={() => setSelectedPdf(null)}
-                  className="bg-white/10 hover:bg-white/15 px-6 py-2 rounded-full text-xs font-bold uppercase text-white transition-all cursor-pointer select-none"
-                >
-                  Dismiss notice
-                </button>
-                <button
-                  onClick={() => alert("Simulated certificate download triggered.")}
-                  className="bg-[#B600A8] hover:bg-[#B65DA8] px-6 py-2 rounded-full text-xs font-bold uppercase text-white transition-all cursor-pointer select-none"
-                >
-                  Simulate PDF view
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
 
       </div>
     </section>

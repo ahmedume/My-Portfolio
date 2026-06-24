@@ -94,12 +94,12 @@ export function Chatbot() {
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Bot className="w-8 h-8 text-[#B600A8]" />
                 <h1 className="hero-heading font-black text-3xl uppercase tracking-tighter">
-                  Ahmed's AI Agent
+                  Get to Know Me
                 </h1>
               </div>
             </FadeIn>
             <p className="text-xs text-[#D7E2EA]/40 font-mono mt-1">
-              Recruitment Companion Unit • Filtered Data Retrieval Interface
+              Ask me anything about my journey, skills, and experience
             </p>
           </div>
 
@@ -111,11 +111,6 @@ export function Chatbot() {
                 Power: {engineUsed} API
               </span>
             )}
-            
-            <span className="text-[10px] sm:text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/10 px-3 py-1 rounded-full font-mono flex items-center gap-1.5 uppercase">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              Privacy Guard ACTIVE
-            </span>
           </div>
         </div>
 
@@ -130,12 +125,12 @@ export function Chatbot() {
                 className={`flex gap-3 max-w-[85%] ${isBot ? "mr-auto" : "ml-auto flex-row-reverse"}`}
               >
                 {/* Agent Avatar Icon */}
-                <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center select-none shadow-md ${isBot ? "bg-[#B600A8]/10 text-[#B600A8]" : "bg-white/10 text-stone-300"}`}>
+                <div className={`w-8 h-8 rounded flex-shrink-0 flex items-center justify-center select-none shadow-md border-2 ${isBot ? "bg-[#B600A8]/10 text-[#B600A8] border-[#B600A8]/30" : "bg-white/10 text-stone-300 border-white/20"}`}>
                   {isBot ? <Bot className="w-4 h-4" /> : <User className="w-4 h-4" />}
                 </div>
 
                 {/* Bubble details */}
-                <div className={`p-4 rounded-3xl text-sm leading-relaxed ${isBot ? "bg-[#121212] text-[#D7E2EA]/90 border border-white/5" : "bg-gradient-to-r from-[#B600A8] to-[#7621B0] text-white shadow-xl"}`}>
+                <div className={`p-4 rounded-none text-sm leading-relaxed border-2 ${isBot ? "bg-[#121212] text-[#D7E2EA]/90 border-white/10" : "bg-gradient-to-r from-[#B600A8] to-[#7621B0] text-white border-[#B600A8]/50 shadow-[4px_4px_0px_rgba(182,0,168,0.3)]"}`}>
                   <p className="whitespace-pre-line">{m.text}</p>
                 </div>
               </div>
@@ -182,7 +177,7 @@ export function Chatbot() {
         <div className="bg-red-500/5 border border-red-500/10 rounded-2xl p-3.5 mb-4 flex gap-3 text-xs text-red-400 select-text leading-relaxed">
           <AlertTriangle className="w-4 h-4 text-orange-400 flex-shrink-0 mt-0.5" />
           <p>
-            <span className="font-bold uppercase tracking-widest text-red-300">Privacy Mandate Applied</span>: For security and data safety guidelines, Ahmed&apos;s personal phone number and exact street residence details are strictly encrypted. Contact remains verified via <span className="underline font-bold text-white selection:bg-red-400">ahmedumeranwer@gmail.com</span> exclusively.
+            <span className="font-bold uppercase tracking-widest text-red-300">Data Safety Notice</span>: For privacy, personal contact details are kept confidential. Reach Ahmed directly at <span className="underline font-bold text-white selection:bg-red-400">ahmedumeranwer@gmail.com</span>.
           </p>
         </div>
 

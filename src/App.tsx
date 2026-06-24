@@ -79,7 +79,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#0C0C0C] text-[#D7E2EA] overflow-x-hidden font-sans pb-32">
+    <div className="relative min-h-screen bg-[#0C0C0C] text-[#D7E2EA] overflow-x-hidden font-sans">
       
       {/* BACKGROUND DECORATIVE GRID */}
       <div className="absolute inset-0 bg-[radial-gradient(#1e1e1e_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none z-0" />
@@ -96,10 +96,7 @@ export default function App() {
         >
           {activeTab === "home" && (
             <div id="home">
-              <Hero 
-                onNavigate={handleNavigate} 
-                onOpenPricing={() => setIsPricingOpen(true)} 
-              />
+              <Hero />
               <Marquee />
               <About onContactClick={() => setActiveTab("chatbot")} />
               <Services />
@@ -121,9 +118,9 @@ export default function App() {
       </AnimatePresence>
 
       {/* FLOATING MASTER NAVIGATION CAPSULE */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-55 w-[90%] sm:w-auto max-w-lg pointer-events-none">
+      <div className="fixed top-0 left-0 right-0 z-55 flex justify-center pointer-events-none bg-[#0C0C0C]/30 backdrop-blur-xl border-b border-white/5 py-3">
         <div 
-          className="bg-[#121212]/85 backdrop-blur-xl border-2 border-white/10 rounded-full px-4 py-2 flex items-center justify-between gap-2 sm:gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.8)] pointer-events-auto select-none"
+          className="bg-[#121212]/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2.5 flex items-center justify-between gap-1.5 sm:gap-3 shadow-[0_20px_50px_rgba(0,0,0,0.8)] pointer-events-auto select-none w-[95%] sm:w-auto overflow-x-auto"
         >
           
           <button
@@ -131,13 +128,13 @@ export default function App() {
               setActiveTab("home");
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className={`flex flex-col sm:flex-row items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all cursor-pointer ${
+            className={`flex flex-col sm:flex-row items-center gap-1 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "home" 
                 ? "bg-[#B600A8] text-white shadow-lg" 
                 : "text-[#D7E2EA]/60 hover:text-white"
             }`}
           >
-            <Home className="w-4 h-4" />
+            <Home className="w-4 h-4 shrink-0" />
             <span className="hidden sm:inline">Home</span>
           </button>
 
@@ -146,13 +143,13 @@ export default function App() {
               setActiveTab("all-projects");
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className={`flex flex-col sm:flex-row items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all cursor-pointer ${
+            className={`flex flex-col sm:flex-row items-center gap-1 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "all-projects" 
                 ? "bg-[#B600A8] text-white shadow-lg" 
                 : "text-[#D7E2EA]/60 hover:text-white"
             }`}
           >
-            <FolderGit2 className="w-4 h-4" />
+            <FolderGit2 className="w-4 h-4 shrink-0" />
             <span className="hidden sm:inline">All Projects</span>
           </button>
 
@@ -161,13 +158,13 @@ export default function App() {
               setActiveTab("certs");
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className={`flex flex-col sm:flex-row items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all cursor-pointer ${
+            className={`flex flex-col sm:flex-row items-center gap-1 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "certs" 
                 ? "bg-[#B600A8] text-white shadow-lg" 
                 : "text-[#D7E2EA]/60 hover:text-white"
             }`}
           >
-            <Award className="w-4 h-4" />
+            <Award className="w-4 h-4 shrink-0" />
             <span className="hidden sm:inline">Certs</span>
           </button>
 
@@ -176,13 +173,13 @@ export default function App() {
               setActiveTab("education");
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className={`flex flex-col sm:flex-row items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all cursor-pointer ${
+            className={`flex flex-col sm:flex-row items-center gap-1 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "education" 
                 ? "bg-[#B600A8] text-white shadow-lg" 
                 : "text-[#D7E2EA]/60 hover:text-white"
             }`}
           >
-            <BookOpen className="w-4 h-4" />
+            <BookOpen className="w-4 h-4 shrink-0" />
             <span className="hidden sm:inline">Education</span>
           </button>
 
@@ -191,14 +188,14 @@ export default function App() {
               setActiveTab("chatbot");
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className={`flex flex-col sm:flex-row items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all cursor-pointer relative ${
+            className={`flex flex-col sm:flex-row items-center gap-1 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap relative ${
               activeTab === "chatbot" 
                 ? "bg-gradient-to-r from-[#B600A8] to-[#7621B0] text-white shadow-lg" 
                 : "text-[#D7E2EA]/60 hover:text-white"
             }`}
           >
-            <Bot className="w-4 h-4 text-pink-300" />
-            <span className="hidden sm:inline">AI Agent</span>
+            <Bot className="w-4 h-4 text-pink-300 shrink-0" />
+            <span className="hidden sm:inline">About Me</span>
             <span className="absolute -top-1 -right-1 flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>

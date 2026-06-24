@@ -1,58 +1,22 @@
-import { CornerDownRight, ShieldAlert, BadgeDollarSign } from "lucide-react";
-import { Magnet, ContactButton, FadeIn } from "./UI";
+import { Magnet, FadeIn } from "./UI";
+import { Github, Linkedin } from "lucide-react";
 
-interface HeroProps {
-  onNavigate: (sectionId: string) => void;
-  onOpenPricing: () => void;
-}
 
-export function Hero({ onNavigate, onOpenPricing }: HeroProps) {
+export function Hero() {
   return (
     <section className="relative h-screen min-h-[600px] flex flex-col justify-between overflow-hidden bg-[#0C0C0C] w-full select-none">
       
-      {/* 1. NAVBAR */}
-      <FadeIn delay={0} y={-20} tagName="div">
-        <header className="flex justify-between items-center w-full px-6 md:px-10 pt-6 md:pt-8 bg-transparent z-50">
-          {/* Logo / Title */}
-          <span 
-            onClick={() => onNavigate("home")}
-            className="font-black text-xl tracking-tighter text-[#D7E2EA] cursor-pointer"
-          >
+      {/* 0. LOGO */}
+      <div className="absolute top-4 left-6 md:left-10 z-30">
+        <FadeIn delay={0} y={-20} tagName="span">
+          <span className="font-black text-xl tracking-tighter text-[#D7E2EA] cursor-default select-none">
             AHMED <span className="opacity-40">UMER</span>
           </span>
+        </FadeIn>
+      </div>
 
-          {/* Navigation Links */}
-          <nav className="flex items-center gap-6 sm:gap-10 md:gap-14">
-            <button
-              onClick={() => onNavigate("about")}
-              className="text-xs sm:text-sm md:text-lg lg:text-[1.3rem] font-medium uppercase tracking-wider text-[#D7E2EA] hover:opacity-70 transition-opacity duration-200 cursor-pointer"
-            >
-              About
-            </button>
-            <button
-              onClick={onOpenPricing}
-              className="text-xs sm:text-sm md:text-lg lg:text-[1.3rem] font-medium uppercase tracking-wider text-[#D7E2EA] hover:opacity-70 transition-opacity duration-200 cursor-pointer flex items-center gap-1.2"
-            >
-              Price
-            </button>
-            <button
-              onClick={() => onNavigate("projects")}
-              className="text-xs sm:text-sm md:text-lg lg:text-[1.3rem] font-medium uppercase tracking-wider text-[#D7E2EA] hover:opacity-70 transition-opacity duration-200 cursor-pointer"
-            >
-              Projects
-            </button>
-            <button
-              onClick={() => onNavigate("chatbot")}
-              className="text-xs sm:text-sm md:text-lg lg:text-[1.3rem] font-medium uppercase tracking-wider text-[#D7E2EA] hover:opacity-70 transition-opacity duration-200 cursor-pointer"
-            >
-              Contact
-            </button>
-          </nav>
-        </header>
-      </FadeIn>
-
-      {/* 2. HERO HEADLINES (LAYER BEHIND IMAGE IN Z-INDEX) */}
-      <div className="relative flex-1 flex flex-col justify-center items-center px-4 w-full h-full z-10 pt-16">
+      {/* 1. HERO HEADLINES */}
+      <div className="relative flex-1 flex flex-col justify-center items-center px-4 w-full h-full z-10 pt-20">
         <div className="overflow-hidden w-full text-center">
           <FadeIn delay={0.15} y={40} tagName="div">
             <h1 
@@ -65,7 +29,7 @@ export function Hero({ onNavigate, onOpenPricing }: HeroProps) {
       </div>
 
       {/* 3. HERO PORTRAIT (MAGNET HOVER / ABSOLUTE LAYER) */}
-      <div className="absolute left-1/2 -translate-x-1/2 z-20 pointer-events-none w-full flex justify-center bottom-0 sm:bottom-0 top-1/2 -translate-y-1/2 sm:translate-y-0 sm:top-auto">
+      <div className="absolute left-1/2 -translate-x-1/2 z-20 pointer-events-none w-full flex flex-col items-center justify-center bottom-0 sm:bottom-0 top-1/2 -translate-y-1/2 sm:translate-y-0 sm:top-auto">
         <div className="pointer-events-auto">
           <FadeIn delay={0.6} y={30} duration={1.2} tagName="div">
             <Magnet padding={150} strength={3}>
@@ -80,32 +44,42 @@ export function Hero({ onNavigate, onOpenPricing }: HeroProps) {
             </Magnet>
           </FadeIn>
         </div>
-      </div>
-
-      {/* 4. BOTTOM BAR */}
-      <div className="w-full px-6 md:px-10 pb-7 sm:pb-8 md:pb-10 flex justify-between items-end relative z-35 bg-transparent mt-auto pointer-events-none">
-        {/* Left Bio Capsule */}
-        <div className="pointer-events-auto flex flex-col gap-2">
-          <FadeIn delay={0.35} y={20} tagName="div">
-            <p 
-              className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug"
-              style={{ fontSize: "clamp(0.7rem, 1.25vw, 1.2rem)", maxWidth: "clamp(160px, 18vw, 300px)" }}
+        <div className="mt-4 sm:mt-6 pointer-events-auto">
+          <FadeIn delay={0.8} y={20} tagName="p">
+            <span 
+              className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug text-center animate-text-glow block"
+              style={{ fontSize: "clamp(0.6rem, 1vw, 0.9rem)", maxWidth: "clamp(200px, 30vw, 400px)" }}
             >
               an AI &amp; developer driven by crafting striking and unforgettable projects
-            </p>
-          </FadeIn>
-        </div>
-
-        {/* Right CTA */}
-        <div className="pointer-events-auto">
-          <FadeIn delay={0.5} y={20} tagName="div">
-            <ContactButton 
-              onClick={() => onNavigate("chatbot")} 
-              label="Contact Me"
-            />
+            </span>
           </FadeIn>
         </div>
       </div>
+
+      {/* SOCIAL LINKS */}
+      <div className="absolute bottom-6 right-6 md:right-10 z-30 flex items-center gap-3">
+        <FadeIn delay={1} y={20} tagName="div">
+          <a
+            href="https://github.com/ahmedume"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#D7E2EA]/50 hover:text-[#B600A8] transition-colors duration-200"
+          >
+            <Github className="w-6 h-6" />
+          </a>
+        </FadeIn>
+        <FadeIn delay={1.1} y={20} tagName="div">
+          <a
+            href="https://www.linkedin.com/in/ahmedumeranwer"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#D7E2EA]/50 hover:text-[#B600A8] transition-colors duration-200"
+          >
+            <Linkedin className="w-6 h-6" />
+          </a>
+        </FadeIn>
+      </div>
+
     </section>
   );
 }

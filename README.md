@@ -1,112 +1,244 @@
-# Ahmed Umer — AI & Web Developer Portfolio
+# Ahmed Umer — Portfolio
 
-A premium, industry-grade portfolio website and AI-powered recruitment assistant built by **Ahmed Umer**. Features a deeply interactive interface with custom 3D visuals, micro-animations, and a full-stack AI chatbot for recruiters.
+A full-stack portfolio website for Ahmed Umer, an AI Developer. Built with React 19, Express, and Vite. Features a Groq-powered AI chatbot that answers questions about Ahmed's skills, projects, certifications, and background.
 
----
-
-## 🛠️ Tech Stack
-
-- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS v4, Motion (Framer Motion)
-- **Backend:** Express.js, Node.js
-- **AI Chatbot:** Groq API (Llama 3.3 70B)
-- **Icons:** Lucide React
+**Live:** [ahmed-umer-portfolio.vercel.app](https://ahmed-umer-portfolio.vercel.app)  
+**Contact:** [ahmedumeranwer@gmail.com](mailto:ahmedumeranwer@gmail.com)  
+**GitHub:** [@ahmedume](https://github.com/ahmedume)  
+**LinkedIn:** [Ahmed Umer Anwer](https://www.linkedin.com/in/ahmedumeranwer)
 
 ---
 
-## 📁 Project Structure
+## Tech Stack
+
+| Layer        | Technology                                                   |
+| ------------ | ------------------------------------------------------------ |
+| Frontend     | React 19, TypeScript, Vite, Tailwind CSS v4, Motion (Framer Motion), Lucide Icons |
+| Backend      | Express.js, TypeScript, esbuild (bundling)                   |
+| AI Chat      | Groq API (llama-3.3-70b-versatile) with custom system prompt |
+| Assets       | Local images (public/projects/), PDF certs (public/certs/) |
+
+---
+
+## Features
+
+### Hero Section
+- Animated "hi, i'm ahmed" heading with glow text effect
+- Portrait with magnet hover effect
+- GitHub / LinkedIn social links
+
+### About Section
+- Decorative 3D corner assets
+- Animated text reveals
+- Contact modal with cost estimation parameters
+
+### Projects (4 Projects)
+
+| Project                  | Year | Description |
+| ------------------------ | ---- | ----------- |
+| Medical Research Assistant | 2025 | Multi-agent health system using LangGraph React Agents with live PubMed and FDA database integration. Final Year Project. |
+| MedLens                  | 2026 | Clinical journal auditing system that crawls PubMed, matches metadata, and generates structured trust scores. |
+| Virtual Try On           | 2025 | Browser-first virtual cloth try-on using computer vision and MediaPipe for digital apparel styling. |
+| Voice Intelligence       | 2026 | Dual-direction audio intelligence dashboard with speech-to-text, voice synthesis, and real-time noise gating. |
+
+Each project has a detail modal with full description, tags, and screenshots.
+
+### Certifications (10)
+
+| Certification                                     | Issuer                  | Year |
+| ------------------------------------------------- | ----------------------- | ---- |
+| Introduction to Model Context Protocol            | Anthropic               | 2026 |
+| Introduction to LangChain                         | LangChain Academy       | 2026 |
+| n8n Course Level 1                                | n8n                     | 2025 |
+| Cyber Security Essentials                         | Cisco Networking Academy| 2024 |
+| ICASE-2025 (STEAM Education Conference)           | University of Faisalabad| 2025 |
+| Innovative Pakistan Participant                   | University of Faisalabad| 2026 |
+| Introduction to Modern AI                         | Cisco Networking Academy| 2026 |
+| Python Essentials 1                               | Cisco Networking Academy| 2026 |
+| Python Essentials 2                               | Cisco Networking Academy| 2026 |
+| Fundamentals of Digital Marketing                 | Google Digital Garage   | 2022 |
+
+Each cert card opens the PDF in a new tab.
+
+### Education
+
+| Institution                | Degree                        | Duration    |
+| -------------------------- | ----------------------------- | ----------- |
+| The University of Faisalabad | BS Artificial Intelligence   | 2022 – 2026 |
+| Concordia College          | Intermediate in Computer Science (ICS) | 2020 – 2022 |
+| Kohinoor Grammar School    | Matric (Secondary School Certificate) | 2018 – 2020 |
+
+### AI Chatbot ("Get to Know Me")
+- Groq-powered conversational agent
+- Pre-configured with Ahmed's CV data — projects, skills, certifications, hackathons, experience
+- Starter prompts for quick questions
+- Data safety notice with contact email fallback
+
+### Navigation
+- Fixed top nav bar with glass morphism
+- Tabs: Home, All Projects, Certs, Education, About Me
+- Active tab highlighting with gradient
+
+---
+
+## Project Structure
 
 ```
-├── server.ts                # Express backend entry point (serves Vite in dev, static in prod)
-├── /server
-│   └── chatbot.ts           # AI recruitment chatbot with strict privacy guardrails
-├── /src
-│   ├── main.tsx             # DOM mount point
-│   ├── App.tsx              # Central state engine, tab router, pricing calculator
-│   ├── index.css            # Global styles & font imports
-│   └── /components
-│       ├── Hero.tsx         # Landing viewport with portrait, navbar, and magnet effect
-│       ├── Marquee.tsx      # Infinite-scroll motion showcase
-│       ├── About.tsx        # Scroll-reveal narrative section with 3D corner assets
-│       ├── Services.tsx     # Services showcase on high-contrast white background
-│       ├── Projects.tsx     # Sticky stacking project cards with scaling animations
-│       ├── ProjectsList.tsx # Detailed project list page
-│       ├── Certs.tsx        # Certifications page with PDF simulation overlays
-│       ├── Education.tsx    # Academic timeline with institution nodes
-│       ├── Chatbot.tsx      # AI recruiter chatbot interface
-│       └── UI.tsx           # Reusable micro-interaction components (Magnet, FadeIn, AnimatedText)
+ahmed-umer-portfolio/
+├── public/
+│   ├── cv.pdf
+│   ├── certs/                  # 10 certification PDFs
+│   └── projects/               # Project screenshots
+│       ├── fitcheck/
+│       ├── medical-research-assistant/
+│       ├── medlens/
+│       └── voice-intelligence/
+├── src/
+│   ├── components/
+│   │   ├── Hero.tsx            # Hero section, logo, portrait, socials
+│   │   ├── About.tsx           # About section with contact modal
+│   │   ├── Projects.tsx        # Homepage project cards
+│   │   ├── ProjectsList.tsx    # All-projects grid + detail modal
+│   │   ├── Certs.tsx           # Certifications grid
+│   │   ├── Education.tsx       # Education timeline
+│   │   ├── Chatbot.tsx         # AI chatbot (Get to Know Me)
+│   │   ├── Services.tsx        # Services section
+│   │   ├── Marquee.tsx         # Marquee ticker
+│   │   └── UI.tsx              # Reusable components (FadeIn, Magnet, AnimatedText)
+│   ├── App.tsx                 # Main layout, navigation, tab routing
+│   ├── index.css               # Global styles, Tailwind, keyframes
+│   └── main.tsx                # Entry point
+├── server/
+│   └── chatbot.ts              # Groq API chat handler + system prompt
+├── server.ts                   # Express server (dev + prod modes)
+├── .env.example                # Environment variable template
+├── vite.config.ts
+├── tsconfig.json
+├── package.json
+└── README.md
 ```
 
 ---
 
-## 💡 Key Features
-
-- **Magnetic Mouse Effect** — Mouse-following pull effect on the Hero portrait
-- **Character-by-Character Scroll Reveal** — Text animates from transparent to opaque as you scroll
-- **Sticky Stacking Cards** — Project cards scale down as they scroll past the viewport
-- **Interactive Pricing Calculator** — Recruiters can estimate freelance project costs and send quotes directly to the chatbot
-- **AI Recruitment Chatbot** — Server-side LLM-powered bot with enforced privacy guardrails (phone/address are never exposed)
-
----
-
-## ⚡ Getting Started
+## Getting Started
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) v18 or newer
+- Node.js 18+
+- A Groq API key ([console.groq.com](https://console.groq.com))
 
 ### Installation
 
 ```bash
+git clone https://github.com/ahmedume/ahmed-umer-portfolio.git
+cd ahmed-umer-portfolio
 npm install
 ```
 
-### Configure Environment Variables
+### Environment Setup
 
-Copy `.env.example` to `.env` and add your Groq API key:
+Copy the example env file and add your Groq API key:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env`:
 
 ```env
 GROQ_API_KEY="gsk_your_actual_groq_api_key_here"
 APP_URL="http://localhost:3000"
 ```
 
-Get a free key from [console.groq.com](https://console.groq.com).
-
-### Run Development Server
+### Development
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Opens at [http://localhost:3000](http://localhost:3000) with hot module replacement.
 
 ### Production Build
 
 ```bash
 npm run build
-npm run start
+```
+
+Builds the Vite frontend and bundles the Express server into `dist/`.
+
+### Production Start
+
+```bash
+npm start
+```
+
+Serves the built app on port 3000.
+
+---
+
+## API Endpoints
+
+| Endpoint     | Method | Description                    |
+| ------------ | ------ | ------------------------------ |
+| `/api/chat`  | POST   | Send a message to the AI chatbot |
+| `/api/health`| GET    | Health check                   |
+
+### POST /api/chat
+
+**Request:**
+```json
+{
+  "message": "What projects has Ahmed worked on?",
+  "history": [
+    { "role": "user", "text": "..." },
+    { "role": "model", "text": "..." }
+  ]
+}
+```
+
+**Response:**
+```json
+{
+  "text": "Ahmed has worked on...",
+  "engine": "groq"
+}
 ```
 
 ---
 
-## 🔒 Privacy Guardrails
+## Deployment
 
-The AI chatbot enforces strict privacy rules at the server level:
-- **Phone number** — Never disclosed. Users are directed to email.
-- **Home address** — Only general region ("Faisalabad, Pakistan") is shared.
-- **Contact** — Only `ahmedumeranwer@gmail.com` is provided.
+The app is a full-stack Express server that serves both the API and the built frontend.
+
+### Option 1: VPS (DigitalOcean, Linode, etc.)
+```bash
+npm run build
+# Copy dist/, package.json, node_modules/, .env to server
+npm start
+```
+Use PM2 or systemd for process management.
+
+### Option 2: Railway / Render
+- Connect GitHub repo
+- Build command: `npm run build`
+- Start command: `node dist/server.cjs`
+- Set `GROQ_API_KEY` and `APP_URL` in environment secrets
+
+### Option 3: Docker
+Create a multi-stage Dockerfile that builds the frontend, bundles the server, and runs with a slim Node image.
 
 ---
 
-## 📝 How to Customize
+## Environment Variables
 
-### Add a New Project
-Edit the `RESUME_PROJECTS` array in `/src/components/ProjectsList.tsx`.
-
-### Add a Certificate PDF
-1. Place your PDF in `/public/`
-2. Update the card in `/src/components/Certs.tsx` with `window.open('/your_file.pdf')`
+| Variable       | Required | Description                              |
+| -------------- | -------- | ---------------------------------------- |
+| `GROQ_API_KEY` | Yes      | Groq API key for the chatbot             |
+| `APP_URL`      | No       | App URL (defaults to http://localhost:3000) |
+| `NODE_ENV`     | No       | Set to "production" for production mode  |
+| `DISABLE_HMR`  | No       | Set to "true" to disable HMR             |
 
 ---
 
-## 📄 License
+## License
 
-This project is proprietary. © Ahmed Umer. All rights reserved.
+MIT
