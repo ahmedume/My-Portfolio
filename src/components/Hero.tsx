@@ -35,7 +35,7 @@ export function Hero() {
             <Magnet padding={150} strength={3}>
               <div className="relative w-[260px] sm:w-[350px] md:w-[420px] lg:w-[480px] pointer-events-auto">
                 <img
-                  src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png"
+                  src="/decor/portrait.png"
                   alt="Ahmed Umer Portrait Grid"
                   referrerPolicy="no-referrer"
                   className="w-full h-auto object-contain drop-shadow-[0_25px_50px_rgba(182,0,168,0.2)] select-none pointer-events-none"
