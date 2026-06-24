@@ -2,7 +2,6 @@
 
 I'm an AI Developer focused on building practical, production-ready AI systems, automation tools, and web applications. This is my full-stack portfolio — built with React 19, Express, and Vite. It includes a Groq-powered AI chatbot that can answer questions about my skills, projects, certifications, and background.
 
-**Live:** [ahmed-umer-portfolio.vercel.app](https://ahmed-umer-portfolio.vercel.app)  
 **Contact:** [ahmedumeranwer@gmail.com](mailto:ahmedumeranwer@gmail.com)  
 **GitHub:** [@ahmedume](https://github.com/ahmedume)  
 **LinkedIn:** [Ahmed Umer Anwer](https://www.linkedin.com/in/ahmedumeranwer)
