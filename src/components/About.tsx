@@ -13,52 +13,47 @@ export function About({ onContactClick }: AboutProps) {
       
       {/* DECORATIVE 3D IMAGES AT 4 CORNERS */}
       
-      {/* 1. Top-Left: Moon icon */}
-      <div className="absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] z-10 pointer-events-none">
-        <FadeIn delay={0.1} x={-80} y={0} duration={0.9} tagName="div">
-          <img
-            src="/decor/moon.png"
-            alt="3D Decorative Moon Asset"
-            referrerPolicy="no-referrer"
-            className="w-[125px] sm:w-[165px] md:w-[215px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
-          />
-        </FadeIn>
-      </div>
+      {/* Decorative images - hidden on very small screens */}
+      <div className="hidden sm:block">
+        <div className="absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] z-10 pointer-events-none">
+          <FadeIn delay={0.1} x={-80} y={0} duration={0.9} tagName="div">
+            <img
+              src="/decor/moon.png"
+              alt=""
+              className="w-[80px] sm:w-[165px] md:w-[215px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
+            />
+          </FadeIn>
+        </div>
 
-      {/* 2. Top-Right: Lego icon */}
-      <div className="absolute top-[4%] right-[1%] sm:right-[2%] md:right-[4%] z-10 pointer-events-none">
-        <FadeIn delay={0.15} x={80} y={0} duration={0.9} tagName="div">
-          <img
-            src="/decor/lego.png"
-            alt="3D Decorative Lego Asset"
-            referrerPolicy="no-referrer"
-            className="w-[125px] sm:w-[165px] md:w-[215px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
-          />
-        </FadeIn>
-      </div>
+        <div className="absolute top-[4%] right-[1%] sm:right-[2%] md:right-[4%] z-10 pointer-events-none">
+          <FadeIn delay={0.15} x={80} y={0} duration={0.9} tagName="div">
+            <img
+              src="/decor/lego.png"
+              alt=""
+              className="w-[80px] sm:w-[165px] md:w-[215px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
+            />
+          </FadeIn>
+        </div>
 
-      {/* 3. Bottom-Left: Flowing 3D object */}
-      <div className="absolute bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%] z-10 pointer-events-none">
-        <FadeIn delay={0.25} x={-80} y={0} duration={0.9} tagName="div">
-          <img
-            src="/decor/bottom-left.png"
-            alt="3D Abstract Pillar Asset"
-            referrerPolicy="no-referrer"
-            className="w-[105px] sm:w-[145px] md:w-[185px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
-          />
-        </FadeIn>
-      </div>
+        <div className="absolute bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%] z-10 pointer-events-none">
+          <FadeIn delay={0.25} x={-80} y={0} duration={0.9} tagName="div">
+            <img
+              src="/decor/bottom-left.png"
+              alt=""
+              className="w-[70px] sm:w-[145px] md:w-[185px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
+            />
+          </FadeIn>
+        </div>
 
-      {/* 4. Bottom-Right: 3D group */}
-      <div className="absolute bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%] z-10 pointer-events-none">
-        <FadeIn delay={0.35} x={80} y={0} duration={0.9} tagName="div">
-          <img
-            src="/decor/bottom-right.png"
-            alt="3D Group Geometry Assets"
-            referrerPolicy="no-referrer"
-            className="w-[135px] sm:w-[175px] md:w-[225px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
-          />
-        </FadeIn>
+        <div className="absolute bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%] z-10 pointer-events-none">
+          <FadeIn delay={0.35} x={80} y={0} duration={0.9} tagName="div">
+            <img
+              src="/decor/bottom-right.png"
+              alt=""
+              className="w-[90px] sm:w-[175px] md:w-[225px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
+            />
+          </FadeIn>
+        </div>
       </div>
 
       {/* CENTRAL CORE CONTENT GRID */}

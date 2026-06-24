@@ -29,7 +29,7 @@ export function Hero() {
       </div>
 
       {/* 3. HERO PORTRAIT (MAGNET HOVER / ABSOLUTE LAYER) */}
-      <div className="absolute left-1/2 -translate-x-1/2 z-20 pointer-events-none w-full flex flex-col items-center justify-center bottom-0 sm:bottom-0 top-1/2 -translate-y-1/2 sm:translate-y-0 sm:top-auto">
+      <div className="absolute left-1/2 -translate-x-1/2 z-20 pointer-events-none w-full flex flex-col items-center justify-end sm:justify-center bottom-0 top-auto sm:top-1/2 sm:-translate-y-1/2 sm:bottom-auto pb-4 sm:pb-0">
         <div className="pointer-events-auto">
           <FadeIn delay={0.6} y={30} duration={1.2} tagName="div">
             <Magnet padding={150} strength={3}>

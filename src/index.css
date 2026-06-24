@@ -7,6 +7,11 @@
   --font-kanit: "Kanit", sans-serif;
 }
 
+@viewport {
+  width: device-width;
+  zoom: 1;
+}
+
 html, body, #root {
   background-color: #0C0C0C !important;
   color: #D7E2EA;
