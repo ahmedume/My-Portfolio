@@ -236,8 +236,3 @@ Create a multi-stage Dockerfile that builds the frontend, bundles the server, an
 | `NODE_ENV`     | No       | Set to "production" for production mode  |
 | `DISABLE_HMR`  | No       | Set to "true" to disable HMR             |
 
----
-
-## License
-
-MIT
