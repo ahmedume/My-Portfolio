@@ -34,7 +34,9 @@ export function Hero() {
       </div>
 
       {/* 3. HERO PORTRAIT (MAGNET HOVER / ABSOLUTE LAYER) */}
-      <div className="absolute left-1/2 -translate-x-1/2 z-20 pointer-events-none w-full flex flex-col items-center justify-end sm:justify-center bottom-0 top-auto sm:top-1/2 sm:-translate-y-1/2 sm:bottom-auto pb-4 sm:pb-0">
+      {/* pb-24 on mobile reserves a row for the social links, which sit in
+          normal flow there instead of overlapping this block. */}
+      <div className="absolute left-1/2 -translate-x-1/2 z-20 pointer-events-none w-full flex flex-col items-center justify-end sm:justify-center bottom-0 top-auto sm:top-1/2 sm:-translate-y-1/2 sm:bottom-auto pb-24 sm:pb-0">
         <div className="pointer-events-auto">
           <FadeIn delay={0.6} y={30} duration={1.2} tagName="div">
             <Magnet padding={150} strength={3}>
@@ -61,8 +63,10 @@ export function Hero() {
         </div>
       </div>
 
-      {/* SOCIAL LINKS: click the mail icon to reveal the address */}
-      <div className="absolute bottom-6 right-6 md:right-10 z-30 flex items-center gap-2 sm:gap-3">
+      {/* SOCIAL LINKS: click the mail icon to reveal the address.
+          Static and centred on mobile so it cannot collide with the portrait;
+          pinned bottom-right from sm up. */}
+      <div className="relative sm:absolute sm:bottom-6 sm:right-6 md:right-10 z-30 flex flex-wrap items-center justify-center sm:justify-end gap-2 pb-5 sm:pb-0 sm:gap-3">
         <FadeIn delay={1} y={20} tagName="div" className="flex items-center gap-1 sm:gap-2">
           <a
             href="https://github.com/ahmedume"
@@ -101,7 +105,7 @@ export function Hero() {
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             href={`mailto:${EMAIL}`}
-            className="bg-[#121212]/90 backdrop-blur-xl border border-[#B600A8]/40 text-[#D7E2EA] text-[11px] sm:text-sm font-mono px-3 sm:px-4 py-2 sm:py-2.5 rounded-full whitespace-nowrap max-w-[58vw] sm:max-w-none truncate hover:border-[#B600A8] transition-colors select-text"
+            className="bg-[#121212]/90 backdrop-blur-xl border border-[#B600A8]/40 text-[#D7E2EA] text-[11px] sm:text-sm font-mono px-3 sm:px-4 py-2.5 sm:py-2.5 rounded-full whitespace-nowrap max-w-[62vw] sm:max-w-none truncate hover:border-[#B600A8] transition-colors select-text flex items-center min-h-11"
           >
             {EMAIL}
           </motion.a>
