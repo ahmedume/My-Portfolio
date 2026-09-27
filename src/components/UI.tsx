@@ -121,6 +121,7 @@ interface FadeInProps {
   x?: number;
   y?: number;
   tagName?: "div" | "span" | "section" | "li" | "h1" | "h2" | "p";
+  className?: string;
   key?: React.Key;
 }
 
@@ -131,11 +132,13 @@ export function FadeIn({
   x = 0,
   y = 30,
   tagName = "div",
+  className,
 }: FadeInProps) {
   const Component = motion[tagName] as any;
 
   return (
     <Component
+      className={className}
       initial={{ opacity: 0, x, y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: "50px", amount: 0 }}

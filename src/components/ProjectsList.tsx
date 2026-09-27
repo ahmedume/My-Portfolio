@@ -116,12 +116,16 @@ export function ProjectsList() {
               ))}
             </div>
 
-            <h3 className="text-xs font-bold uppercase tracking-widest text-[#D7E2EA]/40 font-mono mb-3">
-              Screenshots
-            </h3>
-            <div className="mb-6">
-              <ShotGallery shots={activeProject.shots} title={activeProject.title} />
-            </div>
+            {activeProject.shots.length > 1 && (
+              <>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[#D7E2EA]/40 font-mono mb-3">
+                  Screenshots
+                </h3>
+                <div className="mb-6">
+                  <ShotGallery shots={activeProject.shots} title={activeProject.title} />
+                </div>
+              </>
+            )}
 
             <div className="flex flex-wrap gap-3 justify-between items-center border-t border-white/5 pt-5">
               <LinkRow repo={activeProject.repo} />

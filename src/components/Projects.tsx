@@ -57,7 +57,9 @@ function StickyCard({ project, scale, topOffset, index, onViewDetails }: StickyC
     target: containerRef as any,
     offset: ["start end", "start start"],
   });
-  const [card, left, right] = [project.shots[0], project.shots[1], project.shots[2]];
+  // Projects with a single image (MRA) get a full-width banner instead of a
+  // broken two-column grid.
+  const [card, left, right] = project.shots;
   const number = String(index + 1).padStart(2, "0");
 
   return (
@@ -97,15 +99,26 @@ function StickyCard({ project, scale, topOffset, index, onViewDetails }: StickyC
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-10 gap-4 mt-6 flex-1 items-stretch">
-          <div className="col-span-1 md:col-span-4 flex flex-col gap-4">
-            <Tile src={card} alt={`${project.title} preview`} tall={false} />
-            <Tile src={left} alt={`${project.title} preview`} tall={true} />
+        {left && right ? (
+          <div className="grid grid-cols-1 md:grid-cols-10 gap-4 mt-6 flex-1 items-stretch">
+            <div className="col-span-1 md:col-span-4 flex flex-col gap-4">
+              <Tile src={card} alt={`${project.title} preview`} tall={false} />
+              <Tile src={left} alt={`${project.title} preview`} tall={true} />
+            </div>
+            <div className="col-span-1 md:col-span-6">
+              <Tile src={right} alt={`${project.title} cinematic preview`} tall={true} />
+            </div>
           </div>
-          <div className="col-span-1 md:col-span-6">
-            <Tile src={right} alt={`${project.title} cinematic preview`} tall={true} />
+        ) : (
+          <div className="mt-6 flex-1 min-h-[220px] overflow-hidden rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border border-white/5 bg-[#121212]">
+            <img
+              src={card}
+              alt={`${project.title} preview`}
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+            />
           </div>
-        </div>
+        )}
       </motion.div>
     </div>
   );

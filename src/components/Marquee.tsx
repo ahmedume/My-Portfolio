@@ -1,33 +1,31 @@
 import { useEffect, useRef, useState } from "react";
+import { asset } from "../lib/asset";
 
+const shot = (dir: string, file: string) => asset(`projects/${dir}/${file}`);
+
+// Two rows drawn from real project screenshots. Kept local so the page makes no
+// third-party requests and the tiles actually show this work.
 const IMAGES_ROW_1 = [
-  "https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif",
-  "https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif",
-  "https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif",
-  "https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif",
-  "https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif",
-  "https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif",
-  "https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif",
-  "https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif",
-  "https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif",
-  "https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif",
-  "https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif"
+  shot("aiverse", "01-landing.png"),
+  shot("datasentry", "01-landing.png"),
+  shot("booksie", "01-landing.png"),
+  shot("aiverse", "05-chat.png"),
+  shot("datasentry", "04-insights.png"),
+  shot("aiverse", "06-detector.png"),
 ];
 
 const IMAGES_ROW_2 = [
-  "https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif",
-  "https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif",
-  "https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif",
-  "https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif",
-  "https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif",
-  "https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif",
-  "https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif",
-  "https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif",
-  "https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif",
-  "https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif"
+  shot("aiverse", "02-detect.png"),
+  shot("datasentry", "02-overview.png"),
+  shot("booksie", "02-login.png"),
+  shot("aiverse", "04-humanize.png"),
+  shot("datasentry", "07-training.png"),
+  shot("aiverse", "03-plagiarism.png"),
+  shot("datasentry", "05-charts.png"),
+  shot("booksie", "03-register.png"),
 ];
 
-// Triple the row arrays to ensure perfect seamless coverage and overflow spacing
+// Repeat each row so the strip never runs out mid-scroll.
 const TRIPLED_ROW_1 = [...IMAGES_ROW_1, ...IMAGES_ROW_1, ...IMAGES_ROW_1];
 const TRIPLED_ROW_2 = [...IMAGES_ROW_2, ...IMAGES_ROW_2, ...IMAGES_ROW_2];
 
@@ -36,78 +34,58 @@ export function Marquee() {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
+    let frame = 0;
     const handleScroll = () => {
-      const section = sectionRef.current;
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      const sectionTop = rect.top + window.scrollY;
-      
-      // Calculate scroll offset proportional to section entrance
-      const computedOffset = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
-      setOffset(computedOffset);
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const section = sectionRef.current;
+        if (!section) return;
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        setOffset((window.scrollY - sectionTop + window.innerHeight) * 0.3);
+      });
     };
 
-    // Passive scroll listener for high FPS scrolling on mobile/desktop
     window.addEventListener("scroll", handleScroll, { passive: true });
-    // Initial compute
     handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
+
+  const row = (images: string[], key: string, reverse: boolean) => (
+    <div
+      className={`flex gap-3 w-max ${reverse ? "self-end" : ""}`}
+      style={{
+        transform: `translateX(${reverse ? -(offset - 400) : offset - 400}px)`,
+        willChange: "transform",
+      }}
+    >
+      {images.map((src, i) => (
+        <div
+          key={`${key}-${i}`}
+          className="w-[200px] h-[130px] sm:w-[320px] sm:h-[200px] md:w-[420px] md:h-[270px] flex-shrink-0 bg-[#161616] rounded-2xl overflow-hidden border border-[#ffffff]/5 shadow-lg"
+        >
+          <img
+            src={src}
+            alt="Project screenshot"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+          />
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div
       ref={sectionRef}
       className="bg-[#0C0C0C] py-16 sm:py-24 md:py-32 overflow-hidden flex flex-col gap-4 relative z-25 select-none"
     >
-      {/* ROW 1: Moves RIGHT on scroll */}
-      <div 
-        className="flex gap-3 w-max"
-        style={{
-          transform: `translateX(${offset - 400}px)`,
-          willChange: "transform",
-        }}
-      >
-        {TRIPLED_ROW_1.map((url, index) => (
-          <div
-            key={`r1-${index}`}
-            className="w-[280px] h-[180px] sm:w-[380px] sm:h-[240px] md:w-[420px] md:h-[270px] flex-shrink-0 bg-[#161616] rounded-2xl overflow-hidden border border-[#ffffff]/5 shadow-lg"
-          >
-            <img
-              src={url}
-              alt="Motion Artwork Tile Row 1"
-              loading="lazy"
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* ROW 2: Moves LEFT on scroll */}
-      <div
-        className="flex gap-3 w-max self-end"
-        style={{
-          transform: `translateX(${-(offset - 400)}px)`,
-          willChange: "transform",
-        }}
-      >
-        {TRIPLED_ROW_2.map((url, index) => (
-          <div
-            key={`r2-${index}`}
-            className="w-[280px] h-[180px] sm:w-[380px] sm:h-[240px] md:w-[420px] md:h-[270px] flex-shrink-0 bg-[#161616] rounded-2xl overflow-hidden border border-[#ffffff]/5 shadow-lg"
-          >
-            <img
-              src={url}
-              alt="Motion Artwork Tile Row 2"
-              loading="lazy"
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-            />
-          </div>
-        ))}
-      </div>
+      {row(TRIPLED_ROW_1, "r1", false)}
+      {row(TRIPLED_ROW_2, "r2", true)}
     </div>
   );
 }

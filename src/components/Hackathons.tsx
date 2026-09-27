@@ -58,7 +58,7 @@ export function Hackathons() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-xs font-mono uppercase tracking-widest text-[#B600A8] hover:underline mb-3 inline-flex items-center gap-1 w-fit"
+                  className="text-xs font-mono uppercase tracking-widest text-[#B600A8] hover:underline mb-3 inline-flex items-center gap-1 w-fit py-3.5 -my-3.5"
                 >
                   {h.event} <ExternalLink className="w-3 h-3" />
                 </a>

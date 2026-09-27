@@ -35,12 +35,9 @@ export const PROJECTS: Project[] = [
       "The frontend is React with a Three.js cinematic background, and every agent step is visible in the UI as it happens.",
     ],
     tags: ["LangGraph", "FastAPI", "PubMed E-utilities", "SSE Streaming", "RAG", "Three.js", "React"],
-    shots: [
-      shot("medical-research-assistant", "article_research.png"),
-      shot("medical-research-assistant", "medical_1.jpeg"),
-      shot("medical-research-assistant", "medical_2.jpeg"),
-      shot("medical-research-assistant", "medical_tall.jpeg"),
-    ],
+    // Screenshots dropped in favour of the demo. The poster frame from the
+    // video doubles as the card image.
+    shots: [asset("videos/mra.jpg")],
     video: asset("videos/mra.mp4"),
   },
   {

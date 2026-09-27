@@ -11,11 +11,10 @@ import { ProjectsList } from "./components/ProjectsList";
 import { Hackathons } from "./components/Hackathons";
 import { Certs } from "./components/Certs";
 import { Education } from "./components/Education";
+import { EMAIL } from "./lib/contact";
 // The Groq chat agent is parked until it is reworked into real retrieval over the
 // CV and project data. Component and /api/chat both stay in the repo, unused.
 // import { Chatbot } from "./components/Chatbot";
-
-const EMAIL = "ahmedumeranwer@gmail.com";
 
 const TABS = [
   { id: "home", label: "Home", icon: Home },
@@ -65,21 +64,24 @@ export default function App() {
         </motion.main>
       </AnimatePresence>
 
-      <nav className="fixed top-0 left-0 right-0 z-55 flex justify-center pointer-events-none bg-[#0C0C0C]/30 backdrop-blur-xl border-b border-white/5 py-2 sm:py-3">
-        <ul className="bg-[#121212]/70 backdrop-blur-xl border border-white/10 rounded-full px-2 sm:px-4 py-1.5 sm:py-2.5 flex items-center gap-0.5 sm:gap-3 shadow-[0_20px_50px_rgba(0,0,0,0.8)] pointer-events-auto select-none list-none w-[98%] sm:w-auto overflow-x-auto touch-pan-x">
+      <nav aria-label="Sections" className="fixed top-0 left-0 right-0 z-55 flex justify-center pointer-events-none bg-[#0C0C0C]/30 backdrop-blur-xl border-b border-white/5 py-2 sm:py-3">
+        {/* Equal-width grid rather than a scrolling strip: 5 tabs always fit and
+            every target clears the 44px minimum touch size. */}
+        <ul className="bg-[#121212]/70 backdrop-blur-xl border border-white/10 rounded-full px-1.5 sm:px-3 py-1.5 sm:py-2.5 grid grid-cols-5 items-stretch gap-0.5 sm:gap-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.8)] pointer-events-auto select-none list-none w-[98%] sm:w-auto sm:flex sm:items-center">
           {TABS.map(({ id, label, icon: Icon }) => (
-            <li key={id}>
+            <li key={id} className="min-w-0">
               <button
                 onClick={() => go(id)}
                 aria-current={activeTab === id ? "page" : undefined}
-                className={`flex flex-col sm:flex-row items-center gap-0.5 sm:gap-1 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-sm font-medium uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
+                title={label}
+                className={`w-full h-11 sm:h-11 sm:w-auto flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 px-1 sm:px-3.5 py-1.5 rounded-full text-[8px] sm:text-sm font-medium uppercase tracking-tight sm:tracking-wider transition-all cursor-pointer active:scale-95 ${
                   activeTab === id
                     ? "bg-[#B600A8] text-white font-semibold shadow-lg"
                     : "text-[#D7E2EA]/80 hover:text-white"
                 }`}
               >
-                <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                <span className="hidden sm:inline">{label}</span>
+                <Icon className="w-4 h-4 shrink-0" aria-hidden="true" />
+                <span className="truncate max-w-full">{label}</span>
               </button>
             </li>
           ))}
