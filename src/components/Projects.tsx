@@ -62,7 +62,7 @@ function StickyCard({ project, scale, topOffset, index, onViewDetails }: StickyC
   return (
     <div
       ref={containerRef}
-      className="sticky h-auto min-h-[75vh] md:h-[80vh] flex flex-col justify-center items-center w-full bg-transparent mb-12 cursor-pointer group"
+      className="sticky h-auto flex flex-col justify-center items-center w-full bg-transparent mb-12 cursor-pointer group"
       style={{ top: `${80 + topOffset}px`, zIndex: 10 + index }}
       onClick={onViewDetails}
     >
@@ -96,14 +96,17 @@ function StickyCard({ project, scale, topOffset, index, onViewDetails }: StickyC
           </div>
         </div>
 
-        {/* Every screenshot is 16:10. Tiles use the same ratio so nothing is
-            cropped to a random slice; a single shot spans the full width. */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 flex-1 items-start">
+        {/* Screenshots are 16:10 and tiles use that ratio, so nothing is cropped.
+            The card is no longer pinned to 80vh: it is sized by its own content,
+            which is what left a ~300px void under every set of tiles. A lone shot
+            is capped in width rather than spanning the card, which made it three
+            times taller than a tile on the other projects. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 items-start">
           {project.shots.slice(0, 3).map((src, i) => (
             <div
               key={src}
-              className={`aspect-[16/10] overflow-hidden rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border border-white/5 bg-[#121212] ${
-                project.shots.length === 1 ? "sm:col-span-2 lg:col-span-3" : ""
+              className={`aspect-[16/10] w-full overflow-hidden rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border border-white/5 bg-[#121212] ${
+                project.shots.length === 1 ? "lg:col-span-2" : ""
               }`}
             >
               <img
