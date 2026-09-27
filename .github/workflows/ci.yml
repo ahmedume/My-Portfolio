@@ -35,20 +35,21 @@ jobs:
         run: npm run build:static
 
       - name: Assert production base path is baked in
-        # vite.config.ts sets base="/" for builds, so index.html must reference
-        # assets from the site root. If base regresses, every asset 404s in
-        # production, so fail here instead. Keep in sync with PAGES_BASE.
+        # The site is served from /My-Portfolio/. If base regresses to "/",
+        # every asset 404s because there is no site at the domain root.
+        # Keep in sync with PAGES_BASE in vite.config.ts.
+        run: grep -q 'src="/My-Portfolio/assets/' dist/index.html
+
+      - name: Assert no CNAME is published
+        # A CNAME moves Pages to that custom domain and stops serving the
+        # github.io/repo path. If the domain does not resolve, the whole site
+        # 404s. Only add one once the domain is registered and pointed here.
         run: |
-          grep -q 'src="/assets/' dist/index.html
-          if grep -q '/My-Portfolio/' dist/index.html; then
-            echo "::error::build still uses the /My-Portfolio/ base path"
+          if [ -f dist/CNAME ]; then
+            echo "::error::dist/CNAME present; site would move off the github.io path"
             exit 1
           fi
-
-      - name: Assert the custom domain is published
-        # Pages reads CNAME from the build output, not the repo root. Without
-        # this the domain silently reverts to the github.io URL each deploy.
-        run: test -f dist/CNAME
+          echo "no CNAME, serving from the project path"
 
       - name: Assert no secrets in the published bundle
         # The Pages build is fully static, so no API key may reach dist/.

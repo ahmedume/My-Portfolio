@@ -2,10 +2,10 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-// Served from the apex domain via the CNAME in public/, so production is
-// rooted at "/". If you drop the custom domain, set this to '/My-Portfolio/'
-// and update the assertion in .github/workflows/ci.yml to match.
-const PAGES_BASE = '/';
+// The site is served from the project path, not a domain root. Publishing a
+// CNAME would move Pages to a custom domain and stop serving this path, so
+// there must be no CNAME in public/ until that domain actually resolves.
+const PAGES_BASE = '/My-Portfolio/';
 
 export default defineConfig(({ command }) => {
   return {

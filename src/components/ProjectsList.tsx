@@ -26,7 +26,7 @@ export function ProjectsList() {
                 onClick={() => setActiveProject(proj)}
                 className="group relative w-full h-full text-left rounded-3xl border-2 border-[#D7E2EA]/10 hover:border-[#D7E2EA]/40 bg-[#121212] p-5 flex flex-col transition-all duration-300 hover:-translate-y-1 shadow-xl cursor-pointer"
               >
-                <div className="w-full h-[200px] overflow-hidden rounded-2xl mb-4 relative bg-[#0C0C0C]">
+                <div className="w-full aspect-[16/10] overflow-hidden rounded-2xl mb-4 relative bg-[#0C0C0C]">
                   <img
                     src={proj.shots[0]}
                     alt={proj.title}

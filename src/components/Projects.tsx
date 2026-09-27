@@ -57,9 +57,6 @@ function StickyCard({ project, scale, topOffset, index, onViewDetails }: StickyC
     target: containerRef as any,
     offset: ["start end", "start start"],
   });
-  // Projects with a single image (MRA) get a full-width banner instead of a
-  // broken two-column grid.
-  const [card, left, right] = project.shots;
   const number = String(index + 1).padStart(2, "0");
 
   return (
@@ -99,44 +96,27 @@ function StickyCard({ project, scale, topOffset, index, onViewDetails }: StickyC
           </div>
         </div>
 
-        {left && right ? (
-          <div className="grid grid-cols-1 md:grid-cols-10 gap-4 mt-6 flex-1 items-stretch">
-            <div className="col-span-1 md:col-span-4 flex flex-col gap-4">
-              <Tile src={card} alt={`${project.title} preview`} tall={false} />
-              <Tile src={left} alt={`${project.title} preview`} tall={true} />
+        {/* Every screenshot is 16:10. Tiles use the same ratio so nothing is
+            cropped to a random slice; a single shot spans the full width. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 flex-1 items-start">
+          {project.shots.slice(0, 3).map((src, i) => (
+            <div
+              key={src}
+              className={`aspect-[16/10] overflow-hidden rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border border-white/5 bg-[#121212] ${
+                project.shots.length === 1 ? "sm:col-span-2 lg:col-span-3" : ""
+              }`}
+            >
+              <img
+                src={src}
+                alt={`${project.title} screenshot ${i + 1}`}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+              />
             </div>
-            <div className="col-span-1 md:col-span-6">
-              <Tile src={right} alt={`${project.title} cinematic preview`} tall={true} />
-            </div>
-          </div>
-        ) : (
-          <div className="mt-6 flex-1 min-h-[220px] overflow-hidden rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border border-white/5 bg-[#121212]">
-            <img
-              src={card}
-              alt={`${project.title} preview`}
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
-            />
-          </div>
-        )}
+          ))}
+        </div>
       </motion.div>
-    </div>
-  );
-}
-
-function Tile({ src, alt, tall }: { src: string; alt: string; tall: boolean }) {
-  return (
-    <div
-      className={`overflow-hidden rounded-[20px] sm:rounded-[30px] md:rounded-[40px] border border-white/5 bg-[#121212] ${
-        tall ? "flex-1 min-h-[160px] md:max-h-[300px]" : "min-h-[140px] md:max-h-[200px]"
-      }`}
-    >
-      <img
-        src={src}
-        alt={alt}
-        referrerPolicy="no-referrer"
-        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-105"
-      />
     </div>
   );
 }
