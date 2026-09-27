@@ -242,7 +242,19 @@ function Character({ char, progress, start, end }: CharacterProps) {
 }
 
 // ==========================================
-// 6. VIDEO PLAYER (click-to-load, never autoplays)
+// 6. ESCAPE-TO-CLOSE
+// ==========================================
+export function useEscape(onEscape: () => void, active: boolean) {
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onEscape();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active, onEscape]);
+}
+
+// ==========================================
+// 7. VIDEO PLAYER (click-to-load, never autoplays)
 // ==========================================
 interface VideoPlayerProps {
   src: string;
@@ -290,7 +302,7 @@ export function VideoPlayer({ src, title }: VideoPlayerProps) {
 }
 
 // ==========================================
-// 7. VIDEO PLACEHOLDER SLOT
+// 8. VIDEO PLACEHOLDER SLOT
 // ==========================================
 export function VideoSlot() {
   return (
@@ -304,7 +316,7 @@ export function VideoSlot() {
 }
 
 // ==========================================
-// 8. SHOT GALLERY (thumbnails -> lightbox)
+// 9. SHOT GALLERY (thumbnails -> lightbox)
 // ==========================================
 export function ShotGallery({ shots, title }: { shots: string[]; title: string }) {
   const [active, setActive] = useState<number | null>(null);
@@ -334,7 +346,7 @@ export function ShotGallery({ shots, title }: { shots: string[]; title: string }
       {active !== null && (
         <div
           onClick={() => setActive(null)}
-          className="fixed inset-0 z-60 flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
         >
           <img
             src={shots[active]}
@@ -348,7 +360,7 @@ export function ShotGallery({ shots, title }: { shots: string[]; title: string }
 }
 
 // ==========================================
-// 9. OUTBOUND REPO / LIVE LINK ROW
+// 10. OUTBOUND REPO / LIVE LINK ROW
 // ==========================================
 export function LinkRow({ repo, live }: { repo?: string; live?: string }) {
   if (!repo && !live) return null;

@@ -9,7 +9,7 @@ export function Hero() {
       
       {/* 0. LOGO */}
       <div className="absolute top-4 left-6 md:left-10 z-30">
-        <FadeIn delay={0} y={-20} tagName="span">
+        <FadeIn delay={0} y={-20} tagName="div">
           <span className="font-black text-xl tracking-tighter text-[#D7E2EA] cursor-default select-none">
             AHMED <span className="opacity-40">UMER</span>
           </span>
@@ -46,13 +46,13 @@ export function Hero() {
           </FadeIn>
         </div>
         <div className="mt-4 sm:mt-6 pointer-events-auto">
-          <FadeIn delay={0.8} y={20} tagName="p">
-            <span 
-              className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug text-center animate-text-glow block"
+          <FadeIn delay={0.8} y={20} tagName="div">
+            <p
+              className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug text-center animate-text-glow"
               style={{ fontSize: "clamp(0.6rem, 1vw, 0.9rem)", maxWidth: "clamp(200px, 30vw, 400px)" }}
             >
               an AI &amp; developer driven by crafting striking and unforgettable projects
-            </span>
+            </p>
           </FadeIn>
         </div>
       </div>
@@ -64,9 +64,11 @@ export function Hero() {
             href="https://github.com/ahmedume"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub"
+            title="GitHub"
             className="text-[#D7E2EA]/50 hover:text-[#B600A8] transition-colors duration-200"
           >
-            <Github className="w-6 h-6" />
+            <Github className="w-6 h-6" aria-hidden="true" />
           </a>
         </FadeIn>
         <FadeIn delay={1.1} y={20} tagName="div">
@@ -74,9 +76,11 @@ export function Hero() {
             href="https://www.linkedin.com/in/ahmedumeranwer"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            title="LinkedIn"
             className="text-[#D7E2EA]/50 hover:text-[#B600A8] transition-colors duration-200"
           >
-            <Linkedin className="w-6 h-6" />
+            <Linkedin className="w-6 h-6" aria-hidden="true" />
           </a>
         </FadeIn>
       </div>

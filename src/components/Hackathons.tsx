@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Trophy, ExternalLink, Award } from "lucide-react";
-import { FadeIn, VideoPlayer, VideoSlot, LinkRow } from "./UI";
+import { FadeIn, VideoPlayer, VideoSlot, LinkRow, useEscape } from "./UI";
 import { HACKATHONS, type Hackathon } from "../data/hackathons";
 
 export function Hackathons() {
   const [active, setActive] = useState<Hackathon | null>(null);
+
+  useEscape(() => setActive(null), !!active);
 
   return (
     <section className="min-h-screen bg-[#0C0C0C] text-[#D7E2EA] px-6 md:px-12 py-24 select-none relative z-30">
@@ -15,7 +17,7 @@ export function Hackathons() {
               Hackathons
             </h1>
           </FadeIn>
-          <FadeIn delay={0.1} y={20} tagName="p">
+          <FadeIn delay={0.1} y={20} tagName="div">
             <p className="text-sm md:text-lg text-[#D7E2EA]/50 max-w-2xl font-light mt-2">
               Competitive builds shipped against global fields, judged on execution and originality.
             </p>
@@ -84,7 +86,7 @@ export function Hackathons() {
       {active && (
         <div
           onClick={() => setActive(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 pt-24"
         >
           <div
             onClick={(e) => e.stopPropagation()}

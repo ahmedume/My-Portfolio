@@ -10,6 +10,7 @@ interface CertificationDetails {
   year: string;
   icon: React.ReactNode;
   tags: string[];
+  /** Repo-relative path under public/certs/. */
   pdfUrl: string;
 }
 
@@ -109,7 +110,7 @@ export function Certs() {
               Certifications
             </h1>
           </FadeIn>
-          <FadeIn delay={0.1} y={20} tagName="p">
+          <FadeIn delay={0.1} y={20} tagName="div">
             <p className="text-sm md:text-lg text-[#D7E2EA]/50 max-w-2xl font-light mt-2">
               Verified AI, security, automation, and Python credentials held by Ahmed Umer.
             </p>
@@ -123,6 +124,14 @@ export function Certs() {
               <div 
                 className="group relative rounded-2xl border border-white/10 hover:border-[#B600A8]/40 bg-[#121212]/80 hover:bg-[#121212] p-5 flex flex-col justify-between h-[280px] transition-all duration-300 shadow-lg hover:-translate-y-1 cursor-pointer"
                 onClick={() => window.open(asset(cert.pdfUrl), "_blank", "noopener,noreferrer")}
+                role="link"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    window.open(asset(cert.pdfUrl), "_blank", "noopener,noreferrer");
+                  }
+                }}
               >
                 
                 {/* Upper row: icon and year badge */}

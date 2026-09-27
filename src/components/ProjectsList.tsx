@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
-import { FadeIn, VideoPlayer, VideoSlot, ShotGallery, LinkRow } from "./UI";
+import { FadeIn, VideoPlayer, VideoSlot, ShotGallery, LinkRow, useEscape } from "./UI";
 import { PROJECTS, type Project } from "../data/projects";
 
 export function ProjectsList() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+
+  useEscape(() => setActiveProject(null), !!activeProject);
 
   return (
     <section className="min-h-screen bg-[#0C0C0C] text-[#D7E2EA] px-6 md:px-12 py-24 select-none relative z-30">
@@ -71,7 +73,7 @@ export function ProjectsList() {
       {activeProject && (
         <div
           onClick={() => setActiveProject(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 pt-24"
         >
           <div
             onClick={(e) => e.stopPropagation()}

@@ -64,7 +64,7 @@ export function Education() {
               Education
             </h1>
           </FadeIn>
-          <FadeIn delay={0.1} y={20} tagName="p">
+          <FadeIn delay={0.1} y={20} tagName="div">
             <p className="text-sm md:text-lg text-[#D7E2EA]/50 max-w-2xl font-light mt-2">
               Comprehensive timeline tracking my academic credentials and core scientific foundations.
             </p>
