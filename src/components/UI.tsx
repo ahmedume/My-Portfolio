@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import { Play, Video, Github, ExternalLink } from "lucide-react";
 
 // ==========================================
 // 1. MAGNET COMPONENT
@@ -69,15 +70,16 @@ export function Magnet({
 // 2. CONTACT BUTTON COMPONENT
 // ==========================================
 interface ContactButtonProps {
-  onClick?: () => void;
+  href?: string;
   label?: string;
 }
 
-export function ContactButton({ onClick, label = "Contact Me" }: ContactButtonProps) {
+export function ContactButton({ href, label = "Contact Me" }: ContactButtonProps) {
   return (
-    <button
-      onClick={onClick}
-      className="relative rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base font-medium uppercase tracking-widest text-white transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer select-none"
+    <a
+      href={href}
+      rel="noopener noreferrer"
+      className="inline-block rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base font-medium uppercase tracking-widest text-white transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer select-none"
       style={{
         background: "linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)",
         boxShadow: "0px 4px 4px rgba(181, 1, 167, 0.25), inset 4px 4px 12px #7721B1",
@@ -86,7 +88,7 @@ export function ContactButton({ onClick, label = "Contact Me" }: ContactButtonPr
       }}
     >
       {label}
-    </button>
+    </a>
   );
 }
 
@@ -96,11 +98,10 @@ export function ContactButton({ onClick, label = "Contact Me" }: ContactButtonPr
 interface LiveProjectButtonProps {
   onClick?: () => void;
   label?: string;
-  href?: string;
 }
 
-export function LiveProjectButton({ onClick, label = "Live Project", href }: LiveProjectButtonProps) {
-  const content = (
+export function LiveProjectButton({ onClick, label = "Live Project" }: LiveProjectButtonProps) {
+  return (
     <button
       onClick={onClick}
       className="rounded-full border-2 border-[#D7E2EA] px-8 py-3 sm:px-10 sm:py-3.5 text-sm sm:text-base font-medium uppercase tracking-widest text-[#D7E2EA] hover:bg-[#D7E2EA]/10 active:scale-95 transition-all duration-200 cursor-pointer select-none"
@@ -108,16 +109,6 @@ export function LiveProjectButton({ onClick, label = "Live Project", href }: Liv
       {label}
     </button>
   );
-
-  if (href) {
-    return (
-      <a href={href} target="_blank" rel="noopener noreferrer">
-        {content}
-      </a>
-    );
-  }
-
-  return content;
 }
 
 // ==========================================
@@ -247,5 +238,136 @@ function Character({ char, progress, start, end }: CharacterProps) {
         {char}
       </motion.span>
     </span>
+  );
+}
+
+// ==========================================
+// 6. VIDEO PLAYER (click-to-load, never autoplays)
+// ==========================================
+interface VideoPlayerProps {
+  src: string;
+  poster: string;
+  title: string;
+}
+
+export function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
+  const [playing, setPlaying] = useState(false);
+
+  return (
+    <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black border border-white/10">
+      {playing ? (
+        <video
+          src={src}
+          poster={poster}
+          controls
+          autoPlay
+          playsInline
+          preload="metadata"
+          className="w-full h-full object-contain"
+        >
+          <track kind="captions" />
+        </video>
+      ) : (
+        <button
+          onClick={() => setPlaying(true)}
+          aria-label={`Play demo video: ${title}`}
+          className="absolute inset-0 w-full h-full cursor-pointer group"
+        >
+          <img
+            src={poster}
+            alt={`${title} demo preview`}
+            loading="lazy"
+            className="w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity duration-300"
+          />
+          <span className="absolute inset-0 m-auto h-16 w-16 rounded-full bg-[#B600A8] flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-200">
+            <Play className="w-7 h-7 text-white fill-white ml-0.5" />
+          </span>
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ==========================================
+// 7. VIDEO PLACEHOLDER SLOT
+// ==========================================
+export function VideoSlot() {
+  return (
+    <div className="w-full aspect-video rounded-2xl border border-dashed border-white/15 bg-white/[0.02] flex flex-col items-center justify-center gap-2 px-6 text-center">
+      <Video className="w-7 h-7 text-[#D7E2EA]/25" />
+      <p className="text-xs font-mono uppercase tracking-widest text-[#D7E2EA]/35">
+        Demo video coming soon
+      </p>
+    </div>
+  );
+}
+
+// ==========================================
+// 8. SHOT GALLERY (thumbnails -> lightbox)
+// ==========================================
+export function ShotGallery({ shots, title }: { shots: string[]; title: string }) {
+  const [active, setActive] = useState<number | null>(null);
+
+  if (shots.length === 0) return null;
+
+  return (
+    <>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+        {shots.map((src, i) => (
+          <button
+            key={src}
+            onClick={() => setActive(i)}
+            aria-label={`View screenshot ${i + 1} of ${title}`}
+            className="group relative aspect-video overflow-hidden rounded-xl border border-white/5 bg-[#0C0C0C] cursor-pointer hover:border-[#B600A8]/50 transition-colors"
+          >
+            <img
+              src={src}
+              alt={`${title} screenshot ${i + 1}`}
+              loading="lazy"
+              className="w-full h-full object-cover opacity-65 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+            />
+          </button>
+        ))}
+      </div>
+
+      {active !== null && (
+        <div
+          onClick={() => setActive(null)}
+          className="fixed inset-0 z-60 flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+        >
+          <img
+            src={shots[active]}
+            alt={`${title} screenshot ${active + 1}`}
+            className="max-w-full max-h-full rounded-2xl border border-white/10 object-contain"
+          />
+        </div>
+      )}
+    </>
+  );
+}
+
+// ==========================================
+// 9. OUTBOUND REPO / LIVE LINK ROW
+// ==========================================
+export function LinkRow({ repo, live }: { repo?: string; live?: string }) {
+  if (!repo && !live) return null;
+  const base =
+    "px-5 py-2.5 rounded-full border-2 border-[#D7E2EA] text-[11px] sm:text-xs font-medium uppercase tracking-widest text-[#D7E2EA] hover:bg-[#D7E2EA]/10 active:scale-95 transition-all duration-200 cursor-pointer select-none inline-flex items-center gap-1.5";
+
+  return (
+    <div className="flex flex-wrap gap-2.5">
+      {repo && (
+        <a href={repo} target="_blank" rel="noopener noreferrer" className={base}>
+          <Github className="w-3.5 h-3.5" />
+          Source
+        </a>
+      )}
+      {live && (
+        <a href={live} target="_blank" rel="noopener noreferrer" className={base}>
+          <ExternalLink className="w-3.5 h-3.5" />
+          Live Demo
+        </a>
+      )}
+    </div>
   );
 }

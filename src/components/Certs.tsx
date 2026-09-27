@@ -1,6 +1,7 @@
 import React from "react";
 import { Award, Calendar, ShieldCheck, Cpu, Network, Laptop, Sparkles, BrainCircuit, Code } from "lucide-react";
 import { FadeIn } from "./UI";
+import { asset } from "../lib/asset";
 
 interface CertificationDetails {
   id: string;
@@ -93,15 +94,6 @@ const RESUME_CERTS: CertificationDetails[] = [
     icon: <Code className="w-6 h-6 text-amber-400" />,
     tags: ["Cisco", "Python", "OOP", "File Handling"],
     pdfUrl: "/certs/python_essentials_2.pdf"
-  },
-  {
-    id: "digital_marketing",
-    title: "Fundamentals of Digital Marketing",
-    issuer: "Google Digital Garage",
-    year: "2022",
-    icon: <Award className="w-6 h-6 text-red-400" />,
-    tags: ["Google", "Digital Marketing", "SEO", "Analytics"],
-    pdfUrl: "/certs/google_digital_marketing.pdf"
   }
 ];
 
@@ -119,7 +111,7 @@ export function Certs() {
           </FadeIn>
           <FadeIn delay={0.1} y={20} tagName="p">
             <p className="text-sm md:text-lg text-[#D7E2EA]/50 max-w-2xl font-light mt-2">
-              Verified clinical, cybersecurity, workflow automation, and LLM development credentials held by Ahmed Umer.
+              Verified AI, security, automation, and Python credentials held by Ahmed Umer.
             </p>
           </FadeIn>
         </div>
@@ -130,7 +122,7 @@ export function Certs() {
             <FadeIn key={cert.id} delay={index * 0.08} y={30} tagName="div">
               <div 
                 className="group relative rounded-2xl border border-white/10 hover:border-[#B600A8]/40 bg-[#121212]/80 hover:bg-[#121212] p-5 flex flex-col justify-between h-[280px] transition-all duration-300 shadow-lg hover:-translate-y-1 cursor-pointer"
-                onClick={() => window.open(cert.pdfUrl, "_blank")}
+                onClick={() => window.open(asset(cert.pdfUrl), "_blank", "noopener,noreferrer")}
               >
                 
                 {/* Upper row: icon and year badge */}

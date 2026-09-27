@@ -1,5 +1,6 @@
 import { Magnet, FadeIn } from "./UI";
 import { Github, Linkedin } from "lucide-react";
+import { asset } from "../lib/asset";
 
 
 export function Hero() {
@@ -35,7 +36,7 @@ export function Hero() {
             <Magnet padding={150} strength={3}>
               <div className="relative w-[260px] sm:w-[350px] md:w-[420px] lg:w-[480px] pointer-events-auto">
                 <img
-                  src="/decor/portrait.png"
+                  src={asset("decor/portrait.png")}
                   alt="Ahmed Umer Portrait Grid"
                   referrerPolicy="no-referrer"
                   className="w-full h-auto object-contain drop-shadow-[0_25px_50px_rgba(182,0,168,0.2)] select-none pointer-events-none"
