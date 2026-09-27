@@ -1,243 +1,161 @@
-# My Portfolio
+# Ahmed Umer — Portfolio
 
-I'm an AI Developer focused on building practical, production-ready AI systems, automation tools, and web applications. This is my full-stack portfolio — built with React 19, Express, and Vite. It includes a Groq-powered AI chatbot that can answer questions about my skills, projects, certifications, and background.
+Personal portfolio: projects, hackathons, certifications, and education. React 19 + Vite + Tailwind v4, deployed to GitHub Pages by GitHub Actions.
 
-**Contact:** [ahmedumeranwer@gmail.com](mailto:ahmedumeranwer@gmail.com)  
-**GitHub:** [@ahmedume](https://github.com/ahmedume)  
-**LinkedIn:** [Ahmed Umer Anwer](https://www.linkedin.com/in/ahmedumeranwer)
+**Contact:** [ahmedumeranwer@gmail.com](mailto:ahmedumeranwer@gmail.com) · **GitHub:** [@ahmedume](https://github.com/ahmedume) · **LinkedIn:** [Ahmed Umer Anwer](https://www.linkedin.com/in/ahmedumeranwer)
 
 ---
 
-## Tech Stack
+## Stack
 
-| Layer        | Technology                                                   |
-| ------------ | ------------------------------------------------------------ |
-| Frontend     | React 19, TypeScript, Vite, Tailwind CSS v4, Motion (Framer Motion), Lucide Icons |
-| Backend      | Express.js, TypeScript, esbuild (bundling)                   |
-| AI Chat      | Groq API (llama-3.3-70b-versatile) with custom system prompt |
-| Assets       | Local images (public/projects/), PDF certs (public/certs/) |
+| Layer | Technology |
+|---|---|
+| Frontend | React 19, TypeScript, Vite 6, Tailwind CSS v4, Motion, Lucide |
+| Styling pipeline | `src/index.css` → Tailwind CLI → `src/tailwind.css` (generated, committed) |
+| Backend | Express + `server.ts` — **local development only**, not deployed |
+| Hosting | GitHub Pages (static), deployed by `.github/workflows/deploy-pages.yml` |
 
----
-
-## Features
-
-### Hero Section
-- Animated "hi, i'm ahmed" heading with glow text effect
-- Portrait with magnet hover effect
-- GitHub / LinkedIn social links
-
-### About Section
-- Decorative 3D corner assets
-- Animated text reveals
-- Contact modal with cost estimation parameters
-
-### Projects (4 Projects)
-
-| Project                  | Year | Description |
-| ------------------------ | ---- | ----------- |
-| Medical Research Assistant | 2025 | Multi-agent health system using LangGraph React Agents with live PubMed and FDA database integration. Final Year Project. |
-| MedLens                  | 2026 | Clinical journal auditing system that crawls PubMed, matches metadata, and generates structured trust scores. |
-| Virtual Try On           | 2025 | Browser-first virtual cloth try-on using computer vision and MediaPipe for digital apparel styling. |
-| Voice Intelligence       | 2026 | Dual-direction audio intelligence dashboard with speech-to-text, voice synthesis, and real-time noise gating. |
-
-Each project has a detail modal with full description, tags, and screenshots.
-
-### Certifications (10)
-
-| Certification                                     | Issuer                  | Year |
-| ------------------------------------------------- | ----------------------- | ---- |
-| Introduction to Model Context Protocol            | Anthropic               | 2026 |
-| Introduction to LangChain                         | LangChain Academy       | 2026 |
-| n8n Course Level 1                                | n8n                     | 2025 |
-| Cyber Security Essentials                         | Cisco Networking Academy| 2024 |
-| ICASE-2025 (STEAM Education Conference)           | University of Faisalabad| 2025 |
-| Innovative Pakistan Participant                   | University of Faisalabad| 2026 |
-| Introduction to Modern AI                         | Cisco Networking Academy| 2026 |
-| Python Essentials 1                               | Cisco Networking Academy| 2026 |
-| Python Essentials 2                               | Cisco Networking Academy| 2026 |
-| Fundamentals of Digital Marketing                 | Google Digital Garage   | 2022 |
-
-Each cert card opens the PDF in a new tab.
-
-### Education
-
-| Institution                | Degree                        | Duration    |
-| -------------------------- | ----------------------------- | ----------- |
-| The University of Faisalabad | BS Artificial Intelligence   | 2022 – 2026 |
-| Concordia College          | Intermediate in Computer Science (ICS) | 2020 – 2022 |
-| Kohinoor Grammar School    | Matric (Secondary School Certificate) | 2018 – 2020 |
-
-### AI Chatbot ("Get to Know Me")
-- Groq-powered conversational agent
-- Pre-configured with my CV data — projects, skills, certifications, hackathons, experience
-- Starter prompts for quick questions
-- Data safety notice with contact email fallback
-
-### Navigation
-- Fixed top nav bar with glass morphism
-- Tabs: Home, All Projects, Certs, Education, About Me
-- Active tab highlighting with gradient
+The site is a static build. There is no API in production; the Groq chat endpoint is parked (see Chatbot).
 
 ---
 
-## Project Structure
-
-```
-ahmed-umer-portfolio/
-├── public/
-│   ├── cv.pdf
-│   ├── certs/                  # 10 certification PDFs
-│   └── projects/               # Project screenshots
-│       ├── fitcheck/
-│       ├── medical-research-assistant/
-│       ├── medlens/
-│       └── voice-intelligence/
-├── src/
-│   ├── components/
-│   │   ├── Hero.tsx            # Hero section, logo, portrait, socials
-│   │   ├── About.tsx           # About section with contact modal
-│   │   ├── Projects.tsx        # Homepage project cards
-│   │   ├── ProjectsList.tsx    # All-projects grid + detail modal
-│   │   ├── Certs.tsx           # Certifications grid
-│   │   ├── Education.tsx       # Education timeline
-│   │   ├── Chatbot.tsx         # AI chatbot (Get to Know Me)
-│   │   ├── Services.tsx        # Services section
-│   │   ├── Marquee.tsx         # Marquee ticker
-│   │   └── UI.tsx              # Reusable components (FadeIn, Magnet, AnimatedText)
-│   ├── App.tsx                 # Main layout, navigation, tab routing
-│   ├── index.css               # Global styles, Tailwind, keyframes
-│   └── main.tsx                # Entry point
-├── server/
-│   └── chatbot.ts              # Groq API chat handler + system prompt
-├── server.ts                   # Express server (dev + prod modes)
-├── .env.example                # Environment variable template
-├── vite.config.ts
-├── tsconfig.json
-├── package.json
-└── README.md
-```
-
----
-
-## Getting Started
-
-### Prerequisites
-- Node.js 18+
-- A Groq API key ([console.groq.com](https://console.groq.com))
-
-### Installation
+## Commands
 
 ```bash
-git clone https://github.com/ahmedume/ahmed-umer-portfolio.git
-cd ahmed-umer-portfolio
 npm install
+
+npm run dev           # Express + Vite dev server on :3000, HMR, serves /api/*
+npm run build:static  # Tailwind + Vite -> dist/ (what Pages deploys)
+npm run build         # build:static + esbuild bundle of the Express server
+npm start             # serve dist/ via Express (local, NODE_ENV=production)
+npm run lint          # tsc --noEmit
+npm run check         # lint + build:static
 ```
 
-### Environment Setup
-
-Copy the example env file and add your Groq API key:
-
-```bash
-cp .env.example .env
-```
-
-Edit `.env`:
-
-```env
-GROQ_API_KEY="gsk_your_actual_groq_api_key_here"
-APP_URL="http://localhost:3000"
-```
-
-### Development
-
-```bash
-npm run dev
-```
-
-Opens at [http://localhost:3000](http://localhost:3000) with hot module replacement.
-
-### Production Build
-
-```bash
-npm run build
-```
-
-Builds the Vite frontend and bundles the Express server into `dist/`.
-
-### Production Start
-
-```bash
-npm start
-```
-
-Serves the built app on port 3000.
+Node 20+ required (CI uses 22).
 
 ---
 
-## API Endpoints
+## Deploying
 
-| Endpoint     | Method | Description                    |
-| ------------ | ------ | ------------------------------ |
-| `/api/chat`  | POST   | Send a message to the AI chatbot |
-| `/api/health`| GET    | Health check                   |
+Pushes to `main` run two workflows.
 
-### POST /api/chat
+**`ci.yml`** — on every push and PR: install, type check, static build, then
+two assertions that catch silent production failures:
 
-**Request:**
-```json
+- greps `dist/index.html` for the `/My-Portfolio/` base path, so a regression in
+  `vite.config.ts` fails the build rather than 404ing every asset
+- scans `dist/` for API key shapes and env var names. The deployed site is fully
+  static, so **no credential may ever appear in `dist/`**
+
+**`deploy-pages.yml`** — on push to `main`: build, upload the artifact, deploy
+with the `github-pages` environment. Serial concurrency, so a release is never
+cancelled mid-flight.
+
+One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
+
+### Base path
+
+`vite.config.ts` sets `base: '/My-Portfolio/'` for builds and `/` for the dev
+server. Every public asset path goes through `asset()` in `src/lib/asset.ts`,
+which prefixes `import.meta.env.BASE_URL`. **Use `asset()` for any new path
+under `public/`** — a hardcoded `/projects/...` will 404 on Pages.
+
+If the repo is ever renamed, or a custom domain is added, change `PAGES_BASE` in
+`vite.config.ts` and the assertion string in `.github/workflows/ci.yml`.
+
+---
+
+## Adding a project
+
+Edit `src/data/projects.tsx`. That single file drives both the home sticky
+cards and the full project list — there is no second copy to keep in sync.
+
+```tsx
 {
-  "message": "What projects have you worked on?",
-  "history": [
-    { "role": "user", "text": "..." },
-    { "role": "model", "text": "..." }
-  ]
+  id: "my-project",              // folder under public/projects/
+  title: "My Project",
+  category: "Short Descriptor",
+  icon: <Rocket className="w-6 h-6 text-pink-500" />,
+  summary: "One or two sentences. This is the card blurb.",
+  detail: ["Paragraph.", "Paragraph."],
+  tags: ["React", "FastAPI"],
+  shots: [shot("my-project", "01-landing.png")],
+  video: asset("videos/my-project.mp4"),   // omit -> "coming soon" slot
+  repo: "https://github.com/ahmedume/my-project",
+  fyp: true,                                  // optional badge
 }
 ```
 
-**Response:**
-```json
-{
-  "text": "I have worked on...",
-  "engine": "groq"
-}
-```
+Notes:
 
----
+- `shots` drives the gallery, which only renders when there is more than one
+  image. A single-shot project gets a full-width banner on the home page.
+- Omit `video` and the card shows a "demo video coming soon" placeholder rather
+  than a broken player.
+- Video posters are generated from the video basename. `videos/x.mp4` needs
+  `videos/x.jpg` beside it, or the poster 404s.
 
-## Deployment
+### Demo video sizing
 
-The app is a full-stack Express server that serves both the API and the built frontend.
+Commit videos at roughly 12 MB or less. Anything larger makes the repo heavy and
+the page slow. The current set was produced with:
 
-### Option 1: VPS (DigitalOcean, Linode, etc.)
 ```bash
-npm run build
-# Copy dist/, package.json, node_modules/, .env to server
-npm start
+ffmpeg -i input.mp4 -vf scale=1920:-2 \
+  -c:v libx264 -preset slow -profile:v high -pix_fmt yuv420p \
+  -b:v 1650k -maxrate 1900k -bufsize 3800k \
+  -c:a aac -b:a 64k -ac 1 -movflags +faststart out.mp4
+ffmpeg -ss 3 -i out.mp4 -frames:v 1 -vf scale=1280:-2 -q:v 4 out.jpg
 ```
-Use PM2 or systemd for process management.
 
-### Option 2: Railway / Render
-- Connect GitHub repo
-- Build command: `npm run build`
-- Start command: `node dist/server.cjs`
-- Set `GROQ_API_KEY` and `APP_URL` in environment secrets
+`-movflags +faststart` matters: without it the browser cannot begin playback
+until the file has fully downloaded.
 
-### Option 3: Docker
-Create a multi-stage Dockerfile that builds the frontend, bundles the server, and runs with a slim Node image.
+Videos mount only after a click, so page weight is unaffected by their size.
 
 ---
 
-## Environment Variables
+## Structure
 
-| Variable       | Required | Description                              |
-| -------------- | -------- | ---------------------------------------- |
-| `GROQ_API_KEY` | Yes      | Groq API key for the chatbot             |
-| `APP_URL`      | No       | App URL (defaults to http://localhost:3000) |
-| `NODE_ENV`     | No       | Set to "production" for production mode  |
-| `DISABLE_HMR`  | No       | Set to "true" to disable HMR             |
+```
+├── public/
+│   ├── certs/            9 certification PDFs
+│   ├── decor/            hero and about corner art
+│   ├── projects/<id>/    project screenshots
+│   └── videos/           demo videos + poster frames
+├── src/
+│   ├── components/       UI sections
+│   ├── data/             projects.tsx, hackathons.tsx  <- edit these
+│   ├── lib/              asset.ts (base-path helper), contact.ts
+│   └── App.tsx           layout, nav, tab routing
+├── server/chatbot.ts     parked Groq handler
+├── server.ts             Express app (local dev only)
+├── .github/workflows/    ci.yml, deploy-pages.yml
+└── vite.config.ts        Tailwind input + Pages base path
+```
+
+### Generated files
+
+`src/tailwind.css` is a build artifact, committed because the Vite Tailwind
+plugin is not used. It is regenerated by `npm run build:css`, which `build` and
+`build:static` both run first. **Never hand-edit it, and never add a Tailwind
+class without rebuilding** — a missing class means silently unstyled markup.
 
 ---
 
-## License
+## Chatbot
 
-MIT
+`src/components/Chatbot.tsx` and `server/chatbot.ts` are parked and unused; the
+import is commented out in `App.tsx`. They are not part of the deployed site.
+
+The existing handler is not RAG. It sends a hardcoded CV prompt to Groq, has no
+retrieval, no rate limit, and no cap on conversation history. Wiring it back up
+means indexing `cv.pdf` and the project data and retrieving before answering.
+
+---
+
+## Privacy
+
+`ahmedumeranwer@gmail.com` is public by design and lives in `src/lib/contact.ts`.
+No phone number, address, or other personal identifier is in this repository.
