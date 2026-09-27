@@ -34,10 +34,21 @@ jobs:
       - name: Build static site
         run: npm run build:static
 
-      - name: Assert Pages base path is baked in
-        # vite.config.ts sets base=/My-Portfolio/ for builds. If that ever
-        # regresses, every asset 404s on the subpath, so fail here instead.
-        run: grep -q '/My-Portfolio/assets/' dist/index.html
+      - name: Assert production base path is baked in
+        # vite.config.ts sets base="/" for builds, so index.html must reference
+        # assets from the site root. If base regresses, every asset 404s in
+        # production, so fail here instead. Keep in sync with PAGES_BASE.
+        run: |
+          grep -q 'src="/assets/' dist/index.html
+          if grep -q '/My-Portfolio/' dist/index.html; then
+            echo "::error::build still uses the /My-Portfolio/ base path"
+            exit 1
+          fi
+
+      - name: Assert the custom domain is published
+        # Pages reads CNAME from the build output, not the repo root. Without
+        # this the domain silently reverts to the github.io URL each deploy.
+        run: test -f dist/CNAME
 
       - name: Assert no secrets in the published bundle
         # The Pages build is fully static, so no API key may reach dist/.

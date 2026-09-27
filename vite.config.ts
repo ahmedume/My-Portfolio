@@ -2,9 +2,10 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-// Pages serves the app from https://ahmedume.github.io/My-Portfolio/, so the
-// production build needs the repo name in the base path. Dev stays at "/".
-const PAGES_BASE = '/My-Portfolio/';
+// Served from the apex domain via the CNAME in public/, so production is
+// rooted at "/". If you drop the custom domain, set this to '/My-Portfolio/'
+// and update the assertion in .github/workflows/ci.yml to match.
+const PAGES_BASE = '/';
 
 export default defineConfig(({ command }) => {
   return {
