@@ -246,12 +246,13 @@ function Character({ char, progress, start, end }: CharacterProps) {
 // ==========================================
 interface VideoPlayerProps {
   src: string;
-  poster: string;
   title: string;
 }
 
-export function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
+export function VideoPlayer({ src, title }: VideoPlayerProps) {
   const [playing, setPlaying] = useState(false);
+  // Poster frames are generated alongside the video, same basename, .jpg.
+  const poster = src.replace(/\.mp4$/, ".jpg");
 
   return (
     <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black border border-white/10">

@@ -92,11 +92,7 @@ export function Hackathons() {
           >
             <div className="mb-6">
               {active.video ? (
-                <VideoPlayer
-                  src={active.video}
-                  poster={active.shot ?? ""}
-                  title={active.title}
-                />
+                <VideoPlayer src={active.video} title={active.title} />
               ) : (
                 <VideoSlot />
               )}

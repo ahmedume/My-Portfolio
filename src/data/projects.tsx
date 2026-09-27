@@ -90,7 +90,8 @@ export const PROJECTS: Project[] = [
       shot("datasentry", "06-monitor.png"),
       shot("datasentry", "07-training.png"),
     ],
-    video: asset("videos/datasentry.mp4"),
+    // No `video` yet: the card renders the "demo coming soon" slot. To add one,
+    // compress to ~12 MB and set video: asset("videos/datasentry.mp4").
     repo: "https://github.com/ahmedume/DataSentry",
   },
   {
@@ -111,7 +112,8 @@ export const PROJECTS: Project[] = [
       shot("booksie", "02-login.png"),
       shot("booksie", "03-register.png"),
     ],
-    video: asset("videos/booksie.mp4"),
+    // No `video` yet: the card renders the "demo coming soon" slot. To add one,
+    // compress to ~12 MB and set video: asset("videos/booksie.mp4").
     repo: "https://github.com/ahmedume/Booksie",
   },
 ];

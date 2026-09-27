@@ -79,11 +79,7 @@ export function ProjectsList() {
           >
             <div className="mb-6">
               {activeProject.video ? (
-                <VideoPlayer
-                  src={activeProject.video}
-                  poster={activeProject.shots[0]}
-                  title={activeProject.title}
-                />
+                <VideoPlayer src={activeProject.video} title={activeProject.title} />
               ) : (
                 <VideoSlot />
               )}
