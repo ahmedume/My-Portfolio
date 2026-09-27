@@ -40,7 +40,7 @@ export const HACKATHONS: Hackathon[] = [
     ],
     tags: ["React Three Fiber", "Three.js", "WebGL", "GLSL Shaders", "Postprocessing", "Zustand", "Vite"],
     badges: ["X Hackathons Level 2", "Silver Hackathon"],
-    shot: asset("projects/genesis/thumbnail.png"),
+    shot: asset("projects/genesis/thumbnail.webp"),
     video: asset("videos/genesis.mp4"),
     repo: "https://github.com/ahmedume/GENESIS",
     live: "https://ahmedume.github.io/GENESIS/",
