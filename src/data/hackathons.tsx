@@ -20,7 +20,6 @@ export interface Hackathon {
   /** Repo-relative path under public/videos/. */
   video?: string;
   repo?: string;
-  live?: string;
 }
 
 export const HACKATHONS: Hackathon[] = [
@@ -43,7 +42,6 @@ export const HACKATHONS: Hackathon[] = [
     shot: asset("projects/genesis/thumbnail.webp"),
     video: asset("videos/genesis.mp4"),
     repo: "https://github.com/ahmedume/GENESIS",
-    live: "https://ahmedume.github.io/GENESIS/",
   },
   {
     id: "google-adk",

@@ -151,7 +151,7 @@ export function Hackathons() {
 
             <div className="flex flex-wrap gap-3 justify-between items-center border-t border-white/5 pt-5">
               <div className="flex flex-wrap gap-2.5">
-                <LinkRow repo={active.repo} live={active.live} />
+                <LinkRow repo={active.repo} />
                 {active.cert && (
                   <a
                     href={active.cert}

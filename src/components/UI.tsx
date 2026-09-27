@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Play, Video, Github, ExternalLink } from "lucide-react";
+import { Play, Video, Github } from "lucide-react";
 
 // ==========================================
 // 1. MAGNET COMPONENT
@@ -363,27 +363,20 @@ export function ShotGallery({ shots, title }: { shots: string[]; title: string }
 }
 
 // ==========================================
-// 10. OUTBOUND REPO / LIVE LINK ROW
+// 10. OUTBOUND REPO LINK
 // ==========================================
-export function LinkRow({ repo, live }: { repo?: string; live?: string }) {
-  if (!repo && !live) return null;
-  const base =
-    "px-5 py-2.5 rounded-full border-2 border-[#D7E2EA] text-[11px] sm:text-xs font-medium uppercase tracking-widest text-[#D7E2EA] hover:bg-[#D7E2EA]/10 active:scale-95 transition-all duration-200 cursor-pointer select-none inline-flex items-center gap-1.5";
+export function LinkRow({ repo }: { repo?: string }) {
+  if (!repo) return null;
 
   return (
-    <div className="flex flex-wrap gap-2.5">
-      {repo && (
-        <a href={repo} target="_blank" rel="noopener noreferrer" className={base}>
-          <Github className="w-3.5 h-3.5" />
-          Source
-        </a>
-      )}
-      {live && (
-        <a href={live} target="_blank" rel="noopener noreferrer" className={base}>
-          <ExternalLink className="w-3.5 h-3.5" />
-          Live Demo
-        </a>
-      )}
-    </div>
+    <a
+      href={repo}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="px-5 py-2.5 rounded-full border-2 border-[#D7E2EA] text-[11px] sm:text-xs font-medium uppercase tracking-widest text-[#D7E2EA] hover:bg-[#D7E2EA]/10 active:scale-95 transition-all duration-200 cursor-pointer select-none inline-flex items-center gap-1.5"
+    >
+      <Github className="w-3.5 h-3.5" />
+      Source
+    </a>
   );
 }
