@@ -1,5 +1,5 @@
 import React from "react";
-import { Award, Calendar, ShieldCheck, Cpu, Network, Laptop, Sparkles, BrainCircuit, Code } from "lucide-react";
+import { Calendar, ShieldCheck, Cpu, Network, Laptop, BrainCircuit, Code } from "lucide-react";
 import { FadeIn } from "./UI";
 import { asset } from "../lib/asset";
 
@@ -50,24 +50,6 @@ const RESUME_CERTS: CertificationDetails[] = [
     icon: <ShieldCheck className="w-6 h-6 text-blue-400" />,
     tags: ["Cisco", "Cybersecurity", "Network Security", "Threat Detection"],
     pdfUrl: "/certs/cybersecurity.pdf"
-  },
-  {
-    id: "steameducation",
-    title: "International Conference on Advance STEAM Education (ICASE-2025)",
-    issuer: "The University of Faisalabad",
-    year: "2025",
-    icon: <Award className="w-6 h-6 text-amber-500" />,
-    tags: ["STEAM", "Research", "AI in Education", "Conference"],
-    pdfUrl: "/certs/steam_conference.pdf"
-  },
-  {
-    id: "innovative_pakistan",
-    title: "Innovative Pakistan Participant",
-    issuer: "The University of Faisalabad",
-    year: "2026",
-    icon: <Sparkles className="w-6 h-6 text-teal-400" />,
-    tags: ["Innovation", "Entrepreneurship", "Pakistan"],
-    pdfUrl: "/certs/innovative_pakistan.pdf"
   },
   {
     id: "intro_modern_ai",
