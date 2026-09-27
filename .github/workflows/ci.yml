@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Only ever read the repo. Publishing needs its own token, see deploy-pages.yml.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Type check
+        run: npm run lint
+
+      - name: Build static site
+        run: npm run build:static
+
+      - name: Assert Pages base path is baked in
+        # vite.config.ts sets base=/My-Portfolio/ for builds. If that ever
+        # regresses, every asset 404s on the subpath, so fail here instead.
+        run: grep -q '/My-Portfolio/assets/' dist/index.html
+
+      - name: Assert no secrets in the published bundle
+        # The Pages build is fully static, so no API key may reach dist/.
+        # Deliberately does not echo any matched value.
+        run: |
+          if grep -rIlE 'gsk_[A-Za-z0-9]|sk-[A-Za-z0-9]{20}|AIza[0-9A-Za-z_-]{20}|GROQ_API_KEY|GOOGLE_API_KEY|OPENAI_API_KEY|ANTHROPIC_API_KEY' dist/; then
+            echo "::error::possible secret material found in dist/"
+            exit 1
+          fi
+          echo "no secret patterns in dist/"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
